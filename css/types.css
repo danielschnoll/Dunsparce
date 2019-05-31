@@ -1,0 +1,29 @@
+span.type{
+    font-size: 9px;
+    letter-spacing: 1px;
+    background: #666;
+    color: white;
+    padding: 2px 3px;
+    text-transform: uppercase;
+    line-height: 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 1px rgba(0,0,0,1);
+}
+            
+span.Ghost{
+    background: #705898;
+}
+
+span.Psychic{
+    background: #F85888;
+}
+
+span.Dark{
+    background: #666666;
+}
+
+span.Water{
+    background: #4286f4;
+    
+}
