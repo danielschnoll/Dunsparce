@@ -10,18 +10,6 @@ span.type{
     border: 1px solid rgba(0,0,0,0.1);
     text-shadow: 1px 1px 1px rgba(0,0,0,1);
 }
-            
-span.Ghost{
-    background: #705898;
-}
-
-span.Psychic{
-    background: #F85888;
-}
-
-span.Dark{
-    background: #666666;
-}
 
 span.Water{
     background: #4286f4;
@@ -29,6 +17,14 @@ span.Water{
 
 span.Grass{
     background: #53bc1e;
+}
+
+span.Fire{
+    background: rgb(233, 62, 20);
+}
+
+span.Normal{
+    background: #666666;
 }
 
 span.Electric{
@@ -63,8 +59,24 @@ span.Bug{
     background: #9cb820;
 }
 
+span.Flying{
+    background: #9096f0;
+}
+
 span.Fighting{
     background: #992121;
+}
+
+span.Ghost{
+    background: #705898;
+}
+
+span.Psychic{
+    background: #F85888;
+}
+
+span.Dark{
+    background: #666666;
 }
 
 span.Fairy{
