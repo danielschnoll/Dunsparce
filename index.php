@@ -57,7 +57,7 @@
                     echo "<div class ='card border-primary'>";
                     echo "<div class = 'card-body'>";
                     echo "<h5 class='card-title'>". $row[$x]['category']. "</h5>";
-                    echo "<h6 class='card-subtitle mb-2 text-muted'>". $row[$x]['date']."</h6>";
+                    echo "<h6 class='card-subtitle mb-2 text-muted'>Posted: ". $row[$x]['date']."</h6>";
                     echo "<p class='card-text'>". $row[$x]['text']. "</p>";
                     echo "</div></div><br/>";
                 }

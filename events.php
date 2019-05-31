@@ -62,9 +62,24 @@
                     echo "<p class='card-text'>". $row[$x]['text']. "</p>";
                     echo "</div></div><br/>";
                 }
+                echo "<h2>Upcoming Events</h2>
+                      <hr/>";
+                
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE date > CURDATE()");
+                $prep_stmt->execute();
+                $row = $prep_stmt->fetchAll();
+                $count = $prep_stmt->rowCount();
+                for($x = 0; $x < $count; $x++) {
+                    echo "<div class ='card border-primary'>";
+                    echo "<div class = 'card-body'>";
+                    echo "<h5 class='card-title'>". $row[$x]['category']. "</h5>";
+                    echo "<h6 class='card-subtitle mb-2 text-muted'>". $row[$x]['date']."</h6>";
+                    echo "<p class='card-text'>". $row[$x]['text']. "</p>";
+                    echo "</div></div><br/>";
+                }
             ?>
-            <h2>Expired Events (past 30 days)</h2>
-            <hr/>
+            
+            
         </div>
     </body>
 </html>

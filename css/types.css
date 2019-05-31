@@ -25,5 +25,48 @@ span.Dark{
 
 span.Water{
     background: #4286f4;
-    
+}
+
+span.Grass{
+    background: #53bc1e;
+}
+
+span.Electric{
+    background: #ffec1c;
+}
+
+span.Rock{
+    background: #a87e00;
+}
+
+span.Steel{
+    background: #a5a5a5;
+}
+
+span.Ground{
+    background: #e5b23b;
+}
+
+span.Ice{
+    background: #a2e8e4;
+}
+
+span.Dragon{
+    background: #142793;
+}
+
+span.Poison{
+    background: #8217a5;
+}
+
+span.Bug{
+    background: #9cb820;
+}
+
+span.Fighting{
+    background: #992121;
+}
+
+span.Fairy{
+    background: #ff91d8;
 }

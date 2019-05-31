@@ -59,6 +59,9 @@
                     $count = $prep_stmt->rowCount();
 
                     for($x = 0; $x < $count; $x++) {
+                        $weaknesses = $row[$x]['weaknesses'];
+                        $str_arr = preg_split ("/\,/", $weaknesses); 
+
                         include("raids.cardHeader.php");
                         echo "  <!--Overview-->
                                 <div class='row'>
@@ -82,7 +85,11 @@
                                     <hr/>
 
                                     <!--Weaknesses -->
-                                    <h6 class='card-subtitle'>Weaknesses: ". $row[$x]['weaknesses']."</h6>
+                                    <h6>Weaknesses: ";
+                                for($i = 0; $i < sizeof($str_arr); $i++){
+                                    echo "<span class='type ". $str_arr[$i]."'>". $str_arr[$i]. "</span> ";
+                                } 
+                                echo "</h6>
                                 </div>
                                 
                                 <!--Counters -->
@@ -110,7 +117,6 @@
                                         <h6><span class='type ". $innerRow[$y]['fast_type']. "'>". $innerRow[$y]['fast_type']. "</span> " . $innerRow[$y]['fast']."</h6>
                                         <h6><span class='type ". $innerRow[$y]['charged_type']. "'>". $innerRow[$y]['charged_type'] . "</span> " .$innerRow[$y]['charged']."</h6>
                                         <hr/>
-                                        <span class='type Dark'>DARK</span>
                                     </div>
 
                                     <!-- Description -->
