@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Current Pokemon GO Events | Dunsparce.net - News for Pokemon GO Events, Research Tasks, and Eggs</title>
+        <title>Pokemon GO Raids | Dunsparce.net - News for Pokemon GO Events, Research Tasks, and Eggs</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -60,36 +60,102 @@
 
                     for($x = 0; $x < $count; $x++) {
                         $weaknesses = $row[$x]['weaknesses'];
-                        $str_arr = preg_split ("/\,/", $weaknesses); 
+                        $resistances = $row[$x]['resistances'];
+                        $str_arr_weak = preg_split ("/\,/", $weaknesses); 
+                        $str_arr_resist = preg_split("/\,/", $resistances);
+
+                        $fast = $row[$x]['fastMoveList'];
+                        $fastArr = preg_split ("/\,/", $fast);
+                        $charged = $row[$x]['chargedMoveList'];
+                        $chargedArr = preg_split ("/\,/", $charged);
 
                         include("raids.cardHeader.php");
                         echo "  <!--Overview-->
                                 <div class='row'>
                                 <div class='col text-center'>
                                     <img style='width:122px;height:122px;' src='". $row[$x]['img']."'/>
-                                    <h4 class='card-title'>". $row[$x]['name']. "</h4>
+                                    <h2 class='card-title'>". $row[$x]['name']. "</h2>
 
                                     <!--Data-->
+                                    <table class='table'>
+                                        <thead>
+                                            <th>Max CP</th>
+                                            <th>Attack</th>
+                                            <th>Defense</th>
+                                            <th>Stamina</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>".$row[$x]['absMaxCP']."</td>
+                                                <td>".$row[$x]['atk']."</td>
+                                                <td>".$row[$x]['def']."</td>
+                                                <td>".$row[$x]['sta']."</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    <hr/>
+                                    
+                                    <!--Combat Power-->
+                                    <h5 class = 'card-subtitle'>Combat Power Values</h5>
+                                    <br/>
                                     <div class='row'>
                                         <div class='col'>
-                                            <h6>Normal</h6>
+                                            <h6>Raid Boss</h6>
                                             <hr/>
-                                            <h6>". $row[$x]['min_cp']. "-". $row[$x]['max_cp']. "cp</h6>
+                                            ". $row[$x]['raid_cp']. "cp
                                         </div>
                                         <div class='col'>
-                                            <h6>Boosted</h6>
+                                            <h6>Normal (lv20)</h6>
                                             <hr/>
-                                            <h6>". $row[$x]['min_wb']. "-". $row[$x]['max_wb']. "cp</h6>
+                                            ". $row[$x]['min_cp']. "-". $row[$x]['max_cp']. "cp
+                                        </div>
+                                        <div class='col'>
+                                            <h6>Boosted (lv25)</h6>
+                                            <hr/>
+                                            ". $row[$x]['min_wb']. "-". $row[$x]['max_wb']. "cp
                                         </div>
                                     </div>
                                     <hr/>
 
                                     <!--Weaknesses -->
+                                    <h5 class = 'card-subtitle'>Type Matchups</h5>
+                                    <br/>
                                     <h6>Weaknesses: ";
-                                for($i = 0; $i < sizeof($str_arr); $i++){
-                                    echo "<span class='type ". $str_arr[$i]."'>". $str_arr[$i]. "</span> ";
+                                for($i = 0; $i < sizeof($str_arr_weak); $i++){
+                                    echo "<span class='type ". $str_arr_weak[$i]."'>". $str_arr_weak[$i]. "</span> ";
                                 } 
                                 echo "</h6>
+
+                                    <!--Resistances -->
+                                    <h6>Resistances: ";
+                                for($i = 0; $i < sizeof($str_arr_resist); $i++){
+                                    echo "<span class='type ". $str_arr_resist[$i]."'>". $str_arr_resist[$i]. "</span> ";
+                                } 
+                                echo "</h6>
+                                    <hr/>
+
+                                    <!--Moves-->
+                                    <h5 class = 'card-subtitle'>Move Sets</h5>
+                                    <br/>
+                                    <div class = 'row'>
+                                        <!-- Fast -->
+                                        <div class = 'col'>
+                                            <h6>Fast:</h6>";
+                                        
+                                        for($i = 0; $i < sizeof($fastArr); $i+=2){
+                                            echo $fastArr[$i]." <span class='type ". $fastArr[$i+1]. "'>". $fastArr[$i+1]."</span>
+                                            <br/>";
+                                        }
+                                    echo"</div>
+                                        <div class = 'col'>
+                                            <h6>Charged:</h6>";
+                                        for($i = 0; $i < sizeof($chargedArr); $i+=2){
+                                            echo $chargedArr[$i]." <span class='type ". $chargedArr[$i+1]. "'>". $chargedArr[$i+1]."</span>
+                                            <br/>";
+                                        }
+                                    echo "</div>
+                                    </div>
                                 </div>
                                 
                                 <!--Counters -->
