@@ -69,13 +69,30 @@
                         $charged = $row[$x]['chargedMoveList'];
                         $chargedArr = preg_split ("/\,/", $charged);
 
+                        $primary = $row[$x]['main'];
+                        try{
+                            $secondary = $row[$x]['secondary'];
+                        }
+                        catch(Exception $e){
+                            $secondary = NULL;
+                        }
+
                         include("raids.cardHeader.php");
                         echo "  <!--Overview-->
                                 <div class='row'>
                                 <div class='col text-center'>
                                     <img style='width:122px;height:122px;' src='". $row[$x]['img']."'/>
                                     <h2 class='card-title'>". $row[$x]['name']. "</h2>
-
+                                    <div class = 'row text-center'>
+                                        <div class = 'col'>
+                                            <span class='type ". $primary."'>". $primary. "</span> ";
+                                            if($secondary != NULL){
+                                                echo "<span class='type ". $secondary."'>". $secondary. "</span>";
+                                            }
+                                echo"   </div>
+                                    </div>
+                                    <br/>
+                                    
                                     <!--Data-->
                                     <table class='table'>
                                         <thead>
