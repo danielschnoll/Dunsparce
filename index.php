@@ -19,16 +19,16 @@
                             <a class="nav-link" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
+                            <a class="nav-link" href="raids.php">Raids</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="research.php">Research</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="raids.php">Raids</a>
+                            <a class="nav-link" href="eggs.php">Eggs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="eggs.php">Eggs</a>
+                            <a class="nav-link" href="events.php">Events</a>
                         </li>
                     </ul>
                 </div>

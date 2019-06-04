@@ -9,6 +9,31 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <style>
+            img{
+                width: 128px;
+                height: 128px;
+            }
+            @media (max-width: 411px){
+                img{
+                    width: 102px;
+                    height: 102px;
+                }
+            }
+
+            @media (max-width: 375px){
+                img{
+                    width: 90.5px;
+                    height: 90.5px;
+                }
+            }
+            @media (max-width: 360px){
+                img{
+                    width: 83px;
+                    height: 83px;
+                }
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -16,20 +41,20 @@
                 <a class="navbar-brand" href="#">Dunsparce</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
+                    <li class="nav-item">
                             <a class="nav-link" href="index.php">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="research.php">Research</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="raids.php">Raids</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="research.php">Research</a>
+                        </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="eggs.php">Eggs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="events.php">Events</a>
                         </li>
                     </ul>
                 </div>
@@ -56,17 +81,18 @@
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
-                for($x = 0; $x < $count; $x+=4) {
-                    echo "<div class ='row'>";
-                    for($y = $x; $y < $x+4; $y++){
-                        if($y>=$count){
+                for($x = 0; $x < $count; $x+=6) {
+                    echo "<div class ='row justify-content-md-center'>";
+                    for($y = $x; $y < $x+6; $y++){
+                        if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-3 text-center text-black'>";
-                        echo "<div class='container border rounded border-info bg-light'>";
-                        echo "<img style='width:100px;height:100px;' src='".$row[$y]['photo_link']."'/>";
-                        echo "</br>".$row[$y]['name'];
-                        echo "<p><span class='bg-info text-white'>".$row[$y]['min_cp']." to ".$row[$y]['max_cp']."cp</span></p></div>";
+                        echo "<div class = 'col-2-md text-center text-black'>
+                                <div class='container bg-light'>
+                                    <img src='".$row[$y]['img']."'/>
+                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <hr/>
+                                    <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
                     }
                     echo "</div><br/>";
@@ -77,21 +103,22 @@
             <p><img src="/img/egg_5k.png" style="width:26px;height:32px;"/> 5km</p>
             <hr/>
             <?php
-                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 5 AND isActive = 1 ORDER BY dex_num");
+                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 5 ORDER BY dex_num");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
-                for($x = 0; $x < $count; $x+=4) {
-                    echo "<div class ='row'>";
-                    for($y = $x; $y < $x+4; $y++){
-                        if($y>=$count){
+                for($x = 0; $x < $count; $x+=6) {
+                    echo "<div class ='row justify-content-md-center'>";
+                    for($y = $x; $y < $x+6; $y++){
+                        if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-3 text-center text-black'>";
-                        echo "<div class='container border rounded border-info bg-light'>";
-                        echo "<img style='width:100px;height:100px;' src='".$row[$y]['photo_link']."'/>";
-                        echo "</br>".$row[$y]['name'];
-                        echo "<p><span class='bg-info text-white'>".$row[$y]['min_cp']." to ".$row[$y]['max_cp']."cp</span></p></div>";
+                        echo "<div class = 'col-2-md text-center text-black'>
+                                <div class='container bg-light'>
+                                    <img src='".$row[$y]['img']."'/>
+                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <hr/>
+                                    <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
                     }
                     echo "</div><br/>";
@@ -106,17 +133,18 @@
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
-                for($x = 0; $x < $count; $x+=4) {
-                    echo "<div class ='row'>";
-                    for($y = $x; $y < $x+4; $y++){
-                        if($y>=$count){
+                for($x = 0; $x < $count; $x+=6) {
+                    echo "<div class ='row justify-content-md-center'>";
+                    for($y = $x; $y < $x+6; $y++){
+                        if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-3 text-center text-black'>";
-                        echo "<div class='container border rounded border-info bg-light'>";
-                        echo "<img style='width:100px;height:100px;' src='".$row[$y]['photo_link']."'/>";
-                        echo "</br>".$row[$y]['name'];
-                        echo "<p><span class='bg-info text-white'>".$row[$y]['min_cp']." to ".$row[$y]['max_cp']."cp</span></p></div>";
+                        echo "<div class = 'col-2-md text-center text-black'>
+                                <div class='container bg-light'>
+                                    <img style='width:128px;height:128px;' src='".$row[$y]['img']."'/>
+                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <hr/>
+                                    <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
                     }
                     echo "</div><br/>";
@@ -131,17 +159,18 @@
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
-                for($x = 0; $x < $count; $x+=4) {
-                    echo "<div class ='row'>";
-                    for($y = $x; $y < $x+4; $y++){
-                        if($y>=$count){
+                for($x = 0; $x < $count; $x+=6) {
+                    echo "<div class ='row justify-content-md-center'>";
+                    for($y = $x; $y < $x+6; $y++){
+                        if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-3 text-center text-black'>";
-                        echo "<div class='container border rounded border-info bg-light'>";
-                        echo "<img style='width:100px;height:100px;' src='".$row[$y]['photo_link']."'/>";
-                        echo "</br>".$row[$y]['name'];
-                        echo "<p><span class='bg-info text-white'>".$row[$y]['min_cp']." to ".$row[$y]['max_cp']."cp</span></p></div>";
+                        echo "<div class = 'col-2-md text-center text-black'>
+                                <div class='container bg-light'>
+                                    <img style='width:128px;height:128px;' src='".$row[$y]['img']."'/>
+                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <hr/>
+                                    <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
                     }
                     echo "</div><br/>";

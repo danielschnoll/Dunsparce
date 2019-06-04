@@ -6,7 +6,7 @@
                     <h5>Overview</h5>
                 </div>
                 <div class='col'>
-                    <h5>Counters</h5>
+                    <h5>Top Counters</h5>
                 </div>
             </div>
         </div>
