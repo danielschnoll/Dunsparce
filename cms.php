@@ -6,20 +6,26 @@
     }catch(PDOException $e){
         echo 'ERROR: ' . $e->getMessage();
     }
-    $message = "";
+
+    //RAID BOSSES
     if(isset($_POST['SubmitNewBoss'])){
         // prepare sql and bind parameters
+        $secondary = $_POST['secondary'];
+        if($secondary==""){
+            $secondary = NULL;
+        }
         $stmt = $conn->prepare("INSERT INTO raids (name, img, dex_num, main, secondary, 
                                 absMaxCP, atk, def, sta, raid_cp, max_cp, max_wb, min_cp, min_wb, 
                                 tier, isActive, weaknesses, resistances, fastMoveList, chargedMoveList) 
                                 VALUES (:name, :img, :dex_num, :main, :secondary, 
                                 :absMaxCP, :atk, :def, :sta, :raid_cp, :max_cp, :max_wb, :min_cp, :min_wb, 
                                 :tier, :isActive, :weaknesses, :resistances, :fastMoveList, :chargedMoveList)");
+
         $stmt->bindParam(':name', $_POST['name']);
         $stmt->bindParam(':img', $_POST['img']);
         $stmt->bindParam(':dex_num', $_POST['dex_num']);
         $stmt->bindParam(':main', $_POST['main']);
-        $stmt->bindParam(':secondary', $_POST['secondary']);
+        $stmt->bindParam(':secondary', $secondary);
         $stmt->bindParam(':absMaxCP', $_POST['absMaxCP']);
         $stmt->bindParam(':atk', $_POST['atk']);
         $stmt->bindParam(':def', $_POST['def']);
@@ -60,6 +66,82 @@
 
         $stmt->execute();
     }
+ 
+    if(isset($_POST['ToggleToInactiveRaid'])){
+        $stmt = $conn->prepare("UPDATE raids SET isActive = 0 WHERE raids.name = :name");
+        $stmt->execute(array(':name' => $_POST['name']));
+    }
+
+    if(isset($_POST['ToggleToActiveRaid'])){
+        $stmt = $conn->prepare("UPDATE raids SET isActive = 1 WHERE raids.name = :name");
+        $stmt->execute(array(':name' => $_POST['name']));
+    }
+
+    //RESEARCH
+
+    //EGGS
+    if(isset($_POST['SubmitNewPokemonEgg'])){
+        error_reporting(E_ERROR | E_PARSE);
+        $isActive = NULL;
+        if($_POST['isActive'] == NULL){
+            $isActive = 0;
+        }
+        else{
+            $isActive = 1;
+        }
+
+        $shiny = NULL;
+        if($_POST['shiny'] == NULL){
+            $shiny = 0;
+        }
+        else{
+            $shiny = 1;
+        }
+
+        $baby = NULL;
+        if($_POST['baby'] == NULL){
+            $baby = 0;
+        }
+        else{
+            $baby = 1;
+        }
+
+        $stmt = $conn->prepare("INSERT INTO eggs (name, img, dex_num, min_cp, max_cp, egg_dist, baby, isActive, shiny) 
+                                VALUES (:name, :img, :dex_num, :min_cp, :max_cp, :egg_dist, :baby, :isActive, :shiny)");
+
+        $stmt->bindParam(':name', $_POST['name']);
+        $stmt->bindParam(':img', $_POST['img']);
+        $stmt->bindParam(':dex_num', $_POST['dex_num']);
+        $stmt->bindParam(':min_cp', $_POST['min_cp']);
+        $stmt->bindParam(':max_cp', $_POST['max_cp']);
+        $stmt->bindParam(':egg_dist', $_POST['egg_dist']);
+        $stmt->bindParam(':baby', $baby);
+        $stmt->bindParam(':isActive', $isActive);
+        $stmt->bindParam(':shiny', $shiny);
+
+        $stmt->execute();
+    }
+
+    if(isset($_POST['SetEggInactive'])){
+        $stmt = $conn->prepare("UPDATE eggs SET isActive = 0 WHERE eggs.name = :name");
+        $stmt->execute(array(':name' => $_POST['name']));
+    }
+
+    if(isset($_POST['SetEggActive'])){
+        $stmt = $conn->prepare("UPDATE eggs SET isActive = 1 WHERE eggs.name = :name");
+        $stmt->execute(array(':name' => $_POST['name']));
+    }
+
+    if(isset($_POST['ChangeEggDist'])){
+        $stmt = $conn->prepare("UPDATE eggs SET egg_dist = :egg_dist WHERE eggs.name = :name");
+        $stmt->execute(array( ':egg_dist' => $_POST['egg_dist'], ':name' => $_POST['name']));
+    }
+
+    if(isset($_POST['SetShiny'])){
+        $stmt = $conn->prepare("UPDATE eggs SET shiny = 1 WHERE eggs.name = :name");
+        $stmt->execute(array(':name' => $_POST['name']));
+    }
+    
 ?>
 <html>
     <head>
@@ -99,12 +181,14 @@
                 <h1 class = "text-center">Site Management</h1>
             </div>
         </header>
+
         <div class="container text-center">
+
+            <!-- Raid Bosses -->
             <h2 class = 'text-left'>Raid Bosses</h2>
             <div class ='row'>
                 <div class = 'col'>
                     <h5 style="text-decoration: underline;">Insert New Raid Boss</h5>
-                    <?php echo $message;?>
                     <form class = "form-group" method="post">
                         <div class = 'row'>
                             <div class = 'col'>
@@ -127,7 +211,7 @@
                             </div>
                             <div class = 'col'>
                                 <label>Secondary</label>
-                                <input name="secondary" type="text"/>
+                                <input name="secondary" default="" type="text"/>
                             </div>
                             <div class = 'col'>
                                 <label>Max CP</label>
@@ -267,8 +351,8 @@
             <div class ='row'>
                 <div class = 'col'>
                     <h5 style="text-decoration: underline;">Set Active Raid Boss to Inactive</h5>
-                    <form>
-                        <select>
+                    <form class = "form-group" method = "post">
+                        <select name="name">
                             <option disabled selected value> -- select an option -- </option>
                             <?php
                                 $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1");
@@ -277,18 +361,18 @@
                                 $count = $prep_stmt->rowCount();
             
                                 for($x = 0; $x < $count; $x++) {
-                                    echo "<option value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
                                 }
                             ?>
                         </select>
-                        <input type = 'button' value="Submit"/>
+                        <input name = "ToggleToInactiveRaid" type = "submit" value="Submit"/>
                     </form>
                     
                 </div>
                 <div class = 'col'>
                     <h5 style="text-decoration: underline;">Set Inactive Raid Boss to Active</h5>
-                    <form>
-                        <select>
+                    <form class = "form-group" method ="post">
+                        <select name="name">
                             <option disabled selected value> -- select an option -- </option>
                             <?php
                                 $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 0");
@@ -297,11 +381,11 @@
                                 $count = $prep_stmt->rowCount();
             
                                 for($x = 0; $x < $count; $x++) {
-                                    echo "<option value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
                                 }
                             ?>
                         </select>
-                        <input type = 'button'/ value="Submit">
+                        <input name = "ToggleToActiveRaid" type = "submit" value="Submit"/>
                     </form>
                 </div>
             </div>
@@ -334,20 +418,131 @@
             <div class = 'row'>
                 <div class = 'col'>
                     <h5 style="text-decoration: underline;">Add New Pokemon to Egg Pool</h5>
-                    <form>
-                        <input type="text"/>
+                    <form class="form-group" method="post">
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Name</label>
+                                <input name="name" type="text"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Img</label>
+                                <input name="img" type="text"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Dex #</label>
+                                <input name="dex_num" type="number" min="1" max= "999"/>
+                            </div>
+                        </div>
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Min CP</label>
+                                <input name="min_cp" type="number" min="1"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Max CP</label>
+                                <input name="max_cp" type="number" min="1"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Egg Distance</label>
+                                <input name="egg_dist" type="number" min="1" max= "10"/>
+                            </div>
+                        </div>
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Baby?</label>
+                                <input name="baby" type="checkbox" value = "1"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Is Active?</label>
+                                <input name="isActive" type="checkbox" value = "1"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Shiny?</label>
+                                <input name="shiny" type="checkbox" value = "1"/>
+                            </div>
+                        </div>
+                        <input type ="submit" name="SubmitNewPokemonEgg" value="Submit"/>
+                    </form>
+                </div>
+            </div>
+            <div class = 'row'>
+                <div class ='col'>
+                    <h5 style="text-decoration: underline;">Disable Pokemon Egg</h5>
+                    <form class = "form-group" method = "post">
+                        <select name="name">
+                            <option disabled selected value>-- select an option --</option>
+                            <?php
+                                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE isActive = 1 ORDER BY dex_num");
+                                $prep_stmt->execute();
+                                $row = $prep_stmt->fetchAll();
+                                $count = $prep_stmt->rowCount();
+            
+                                for($x = 0; $x < $count; $x++) {
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input name = "SetEggInactive" type = "submit" value="Submit"/>
                     </form>
                 </div>
                 <div class = 'col'>
-                    <h5 style="text-decoration: underline;">Disable Pokemon from Egg Pool</h5>
-                    <form>
-                        <input type="text"/>
+                    <h5 style="text-decoration: underline;">Enable Pokemon Egg</h5>
+                    <form class = "form-group" method = "post">
+                        <select name="name">
+                            <option disabled selected value>-- select an option --</option>
+                            <?php
+                                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE isActive = 0 ORDER BY dex_num");
+                                $prep_stmt->execute();
+                                $row = $prep_stmt->fetchAll();
+                                $count = $prep_stmt->rowCount();
+            
+                                for($x = 0; $x < $count; $x++) {
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input name = "SetEggActive" type = "submit" value="Submit"/>
+                    </form>
+                </div>
+            </div>
+            <div class = 'row'>
+                <div class = 'col'>
+                    <h5 style="text-decoration: underline;">Change Egg Distance Group</h5>
+                    <form class = "form-group" method = "post">
+                        <select name="name">
+                            <option disabled selected value>-- select an option --</option>
+                            <?php
+                                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE isActive = 1 ORDER BY dex_num");
+                                $prep_stmt->execute();
+                                $row = $prep_stmt->fetchAll();
+                                $count = $prep_stmt->rowCount();
+            
+                                for($x = 0; $x < $count; $x++) {
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input name = "egg_dist" type ="number" min = "1" max = "10"/>
+                        <input name = "ChangeEggDist" type = "submit" value="Submit"/>
                     </form>
                 </div>
                 <div class = 'col'>
-                    <h5 style="text-decoration: underline;">Enable Pokemon from Egg Pool</h5>
-                    <form>
-                        <input type="text"/>
+                    <h5 style="text-decoration: underline;">Make Shiny</h5>
+                    <form class = "form-group" method = "post">
+                        <select name="name">
+                            <option disabled selected value>-- select an option --</option>
+                            <?php
+                                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE shiny = 0 ORDER BY dex_num");
+                                $prep_stmt->execute();
+                                $row = $prep_stmt->fetchAll();
+                                $count = $prep_stmt->rowCount();
+            
+                                for($x = 0; $x < $count; $x++) {
+                                    echo "<option name ='".$row[$x]['name']."' value='".$row[$x]['name']."'>". $row[$x]['name']. "</option>";
+                                }
+                            ?>
+                        </select>
+                        <input name = "SetShiny" type = "submit" value="Submit"/>
                     </form>
                 </div>
             </div>

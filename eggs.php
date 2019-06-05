@@ -11,20 +11,20 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <style>
             img{
-                width: 128px;
-                height: 128px;
+                width: 100px;
+                height: 100px;
             }
             @media (max-width: 411px){
                 img{
-                    width: 102px;
-                    height: 102px;
+                    width: 90px;
+                    height: 90px;
                 }
             }
 
             @media (max-width: 375px){
                 img{
-                    width: 90.5px;
-                    height: 90.5px;
+                    width: 85px;
+                    height: 85px;
                 }
             }
             @media (max-width: 360px){
@@ -141,7 +141,7 @@
                         }
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
-                                    <img style='width:128px;height:128px;' src='".$row[$y]['img']."'/>
+                                    <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>".$row[$y]['name']."</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
@@ -167,7 +167,7 @@
                         }
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
-                                    <img style='width:128px;height:128px;' src='".$row[$y]['img']."'/>
+                                    <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>".$row[$y]['name']."</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
