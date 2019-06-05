@@ -38,5 +38,8 @@
                 <h1 class = "text-center">Research Tasks</h1>
             </div>    
         </header>
+        <div class = 'container text-center'>
+            <h2>PAGE UNDER CONSTRUCTION</h2>
+        </div>
     </body>
 </html>

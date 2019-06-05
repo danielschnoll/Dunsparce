@@ -16,15 +16,15 @@
             }
             @media (max-width: 411px){
                 img{
-                    width: 90px;
-                    height: 90px;
+                    width: 83px;
+                    height: 83px;
                 }
             }
 
             @media (max-width: 375px){
                 img{
-                    width: 85px;
-                    height: 85px;
+                    width: 90px;
+                    height: 90px;
                 }
             }
             @media (max-width: 360px){
@@ -90,7 +90,15 @@
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
                                     <img src='".$row[$y]['img']."'/>
-                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <br/><h6>";
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo $row[$y]['name'];
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo "</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
@@ -116,7 +124,15 @@
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
                                     <img src='".$row[$y]['img']."'/>
-                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <br/><h6>";
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo $row[$y]['name'];
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo "</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
@@ -129,7 +145,7 @@
             <p><img src="/img/egg_7k.png" style="width:26px;height:32px;"/> 7km</p>
             <hr/>
             <?php
-                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 7 AND isActive = 1 ORDER BY dex_num");
+                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 7 UNION SELECT * FROM eggs WHERE baby = 1 ORDER BY dex_num");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
@@ -142,7 +158,15 @@
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
-                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <br/><h6>";
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo $row[$y]['name'];
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo "</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";
@@ -168,7 +192,15 @@
                         echo "<div class = 'col-2-md text-center text-black'>
                                 <div class='container bg-light'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
-                                    <br/><h6>".$row[$y]['name']."</h6>
+                                    <br/><h6>";
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo $row[$y]['name'];
+                                    if ($row[$y]['shiny']){
+                                        echo "<img style='width:15px;height:15px;' src='/img/sparkles.png'/>";
+                                    }
+                                    echo "</h6>
                                     <hr/>
                                     <p>cp ".$row[$y]['min_cp']."-".$row[$y]['max_cp']."</p></div>";
                         echo "</div>";

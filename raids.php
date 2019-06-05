@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-
+<?php
+    try{
+        $conn = new PDO('mysql:host=localhost;dbname=dunsparce.net', "root", "");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }catch(PDOException $e){
+        echo 'ERROR: ' . $e->getMessage();
+    }
+?>
 <html>
     <head>
         <title>Pokemon GO Raids | Dunsparce.net - News for Pokemon GO Events, Research Tasks, and Eggs</title>
@@ -42,15 +49,8 @@
         </header>
 
         <div class="container">
-            <?php 
-                try{
-                    $conn = new PDO('mysql:host=localhost;dbname=dunsparce.net', "root", "");
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                }catch(PDOException $e){
-                    echo 'ERROR: ' . $e->getMessage();
-                }
-
-                for($tierCount = 5; $tierCount > 0; $tierCount--){
+            <?php
+                for($tierCount = 5; $tierCount > 2; $tierCount--){
                     echo "<h3>Tier ".$tierCount. "</h3>
                           <hr/>";
                     $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount);
@@ -76,11 +76,23 @@
                         catch(Exception $e){
                             $secondary = NULL;
                         }
+                        echo " 
+                            <div class='card border-light'>
 
-                        include("raids.cardHeader.php");
-                        echo "  <!--Overview-->
-                                <div class='row'>
+                            <div class='card-body'>
+
+                            <!--Overview-->
+                            <div class='row'>
                                 <div class='col text-center'>
+                                    <!--Overview Header-->
+                                    <div class='card-header bg-danger text-center text-white'>
+                                        <div class='row'>
+                                            <div class='col'>
+                                                <h5>Overview</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <img style='width:122px;height:122px;' src='". $row[$x]['img']."'/>
                                     <h2 class='card-title'>". $row[$x]['name']. "</h2>
                                     <div class = 'row text-center'>
@@ -174,9 +186,19 @@
                                     echo "</div>
                                     </div>
                                 </div>
-                                
-                                <!--Counters -->
-                                <div class='col'>";
+                            
+
+                            <!-- Counter -->
+                            <div class='col'>
+                            
+                                <!--Counters Header-->
+                                <div class='card-header bg-danger text-center text-white'>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <h5>Counters</h5>
+                                        </div>
+                                    </div>
+                                </div>";
 
                         $currBossDex = $row[$x]['dex_num'];
                         $stmt = "SELECT * FROM counters WHERE counterBossDex =" . $currBossDex ." ORDER BY priority;";
@@ -211,6 +233,7 @@
                     }
                 }
             ?>
+            <div class = 'row'>
         </div>
     </body>
 </html>
