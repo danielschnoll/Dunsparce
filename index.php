@@ -27,9 +27,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="eggs.php">Eggs</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -46,20 +43,108 @@
                     echo 'ERROR: ' . $e->getMessage();
                 }
             ?>
-            <h2>Recent Game Updates</h2>
+            <h1>Current Events</h1>
             <hr/>
             <?php
-                $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(date, '%m/%d/%y') as create_date_formatted FROM updates WHERE date BETWEEN NOW() - INTERVAL 30 DAY AND NOW()");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() BETWEEN dateStart AND dateEnd ");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
                 for($x = 0; $x < $count; $x++) {
-                    echo "<div class ='card border-primary'>";
-                    echo "<div class = 'card-body'>";
-                    echo "<h5 class='card-title'>". $row[$x]['category']. "</h5>";
-                    echo "<h6 class='card-subtitle mb-2 text-muted'>Posted: ". $row[$x]['date']."</h6>";
-                    echo "<p class='card-text'>". $row[$x]['text']. "</p>";
-                    echo "</div></div><br/>";
+                    echo "<div class ='card border-light'>
+                            <div class='card-header'>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class = 'card-body'>
+                                <div class = 'row'>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                    </div>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "</h5>
+                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                    </div>
+                                </div>
+                                
+                                <hr/>
+                                <p class='card-text'>". $row[$x]['text']. "</p>
+                            </div>
+                        </div>
+                        <br/>";
+                }
+                echo "<h1>Upcoming Events</h1>
+                      <hr/>";
+                
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE dateStart > CURDATE()");
+                $prep_stmt->execute();
+                $row = $prep_stmt->fetchAll();
+                $count = $prep_stmt->rowCount();
+                for($x = 0; $x < $count; $x++) {
+                    echo "<div class ='card border-light'>
+                            <div class='card-header'>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class = 'card-body'>
+                                <div class = 'row'>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                    </div>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "</h5>
+                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                    </div>
+                                </div>
+                                
+                                <hr/>
+                                <p class='card-text'>". $row[$x]['text']. "</p>
+                            </div>
+                        </div>
+                        <br/>";
+                }
+            ?>
+            <h1>Site News and Updates</h1>
+            <hr/>
+            <?php
+                $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='News'");
+                $prep_stmt->execute();
+                $row = $prep_stmt->fetchAll();
+                $count = $prep_stmt->rowCount();
+                for($x = 0; $x < $count; $x++) {
+                    echo "<div class ='card border-light'>
+                            <div class='card-header'>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class = 'card-body'>
+                                <div class = 'row'>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                    </div>
+                                    <div class = 'col'>
+                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "</h5>
+                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                    </div>
+                                </div>
+                                
+                                <hr/>
+                                <p class='card-text'>". $row[$x]['text']. "</p>
+                            </div>
+                        </div>
+                        <br/>";
                 }
             ?>
         </div>

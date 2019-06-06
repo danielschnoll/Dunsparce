@@ -28,9 +28,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="eggs.php">Eggs</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
-                        </li>
                     </ul>
                 </div>
             </nav>

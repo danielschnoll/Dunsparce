@@ -141,11 +141,22 @@
         $stmt = $conn->prepare("UPDATE eggs SET shiny = 1 WHERE eggs.name = :name");
         $stmt->execute(array(':name' => $_POST['name']));
     }
+
+    //NEWS
+    if(isset($_POST['NewPost'])){
+        var_dump($_POST['date']);
+        var_dump($_POST['category']);
+        var_dump($_POST['text']);
+        $stmt = $conn->prepare("INSERT INTO updates (id, title, posted, dateStart, dateEnd, category, text) 
+                                            VALUES (id, :title, :posted, :dateStart, :dateEnd, :category, :text)");
+        $stmt->execute(array(':title' => $_POST['title'], ':posted' => $_POST['date'], ':dateStart' => $_POST['dateStart'], 
+                            ':dateEnd' => $_POST['dateEnd'], ':category' => $_POST['category'], ':text' => $_POST['text']));
+    }
     
 ?>
 <html>
     <head>
-        <title>Current Pokemon GO Events | Dunsparce.net - News for Pokemon GO Events, Research Tasks, and Eggs</title>
+        <title>Site Management | Dunsparce.net - News for Pokemon GO Events, Research Tasks, and Eggs</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -170,9 +181,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="eggs.php">Eggs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
                         </li>
                     </ul>
                 </div>
@@ -548,26 +556,51 @@
             </div>
             <hr/>
 
-            <h2 class = 'text-left'>Events</h2>
+            <h2 class = 'text-left'>Events and News</h2>
             <div class = 'row'>
                 <div class = 'col'>
-                    <h5 style="text-decoration: underline;">Add New Event Post</h5>
-                    <form>
-                        <input type="text"/>
+                    <h5 style="text-decoration: underline;">Add New Post</h5>
+                    <form class = "form-group" method="post">
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Category</label>
+                                <select name="category">
+                                    <option name = "Raids" value = "Raids">Raid Event</option>
+                                    <option name = "Research" value = "Research">Research Event</option>
+                                    <option name = "Community Day" value = "Community Day">Community Day</option>
+                                    <option name = "In-Life" value = "In-Life">In-Life Event</option>
+                                    <option name = "In-Game Event" value = "In-Game Event">In-Game Event</option>
+                                    <option name = "News" value = "News">Game News</option>
+                                </select>
+                            </div>
+                            <div class = 'col'>
+                                <label>Title</label>
+                                <input name="title" type="text"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Description</label>
+                                <input name="text" type="text"/>
+                            </div>
+                        </div>
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Posted On</label>
+                                <input name="date" type="date"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Event Start</label>
+                                <input name="dateStart" type="date"/>
+                            </div>
+                            <div class = 'col'>
+                                <label>Event End</label>
+                                <input name="dateEnd" type="date"/>
+                            </div>
+                        </div>
+                        <input name="NewPost" type='submit' value = "Submit"/>
                     </form>
                 </div>
             </div>
             <hr/>
-
-            <h2 class = 'text-left'>News</h2>
-            <div class = 'row'>
-                <div class = 'col'>
-                    <h5 style="text-decoration: underline;">Add New News Post</h5>
-                    <form>
-                        <input type="text"/>
-                    </form>
-                </div>
-            </div>
             <br/>
         </div>
     </body>

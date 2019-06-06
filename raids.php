@@ -37,9 +37,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="eggs.php">Eggs</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.php">Events</a>
-                        </li>
                     </ul>
                 </div>
             </nav>
@@ -51,7 +48,7 @@
         <div class="container">
             <?php
                 for($tierCount = 5; $tierCount > 2; $tierCount--){
-                    echo "<h3>Tier ".$tierCount. "</h3>
+                    echo "<h2>Tier ".$tierCount. "</h2>
                           <hr/>";
                     $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount);
                     $prep_stmt->execute();
@@ -77,13 +74,10 @@
                             $secondary = NULL;
                         }
                         echo " 
-                            <div class='card border-light'>
-
-                            <div class='card-body'>
-
                             <!--Overview-->
                             <div class='row'>
                                 <div class='col text-center'>
+                                    <div class='card border-light'>
                                     <!--Overview Header-->
                                     <div class='card-header bg-danger text-center text-white'>
                                         <div class='row'>
@@ -93,6 +87,8 @@
                                         </div>
                                     </div>
 
+                                    <div class='card-body'>
+                                    
                                     <img style='width:122px;height:122px;' src='". $row[$x]['img']."'/>
                                     <h2 class='card-title'>". $row[$x]['name']. "</h2>
                                     <div class = 'row text-center'>
@@ -186,19 +182,24 @@
                                     echo "</div>
                                     </div>
                                 </div>
+                                </div>
+                                </div> <!-- end col overview -->
                             
 
-                            <!-- Counter -->
-                            <div class='col'>
-                            
-                                <!--Counters Header-->
-                                <div class='card-header bg-danger text-center text-white'>
-                                    <div class='row'>
-                                        <div class='col'>
-                                            <h5>Counters</h5>
+                                <!-- Counter -->
+                                <div class='col'>
+                                    <div class='card border-light'>
+
+                                    <!--Counters Header-->
+                                    <div class='card-header bg-danger text-center text-white'>
+                                        <div class='row'>
+                                            <div class='col'>
+                                                <h5>Counters</h5>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>";
+
+                                    <div class='card-body'>";
 
                         $currBossDex = $row[$x]['dex_num'];
                         $stmt = "SELECT * FROM counters WHERE counterBossDex =" . $currBossDex ." ORDER BY priority;";
@@ -208,32 +209,85 @@
                         $innerCount = $inner_prepStmt->rowCount();
 
                         for($y = 0; $y < $innerCount; $y++){
-                            echo "<!-- A single counter-->
-                                <div class='row'>
+                            echo "  <!-- A single counter-->
+                                    <div class='row'>
 
-                                    <!-- Counter pic-->
-                                    <div class='col text-center'>
-                                        <img style='width:64px;height:64px;' src='".$innerRow[$y]['img']. "'/>
-                                        <p>". $innerRow[$y]['name']."</p>
-                                    </div>
-                                    
-                                    <!-- Moves -->
-                                    <div class='col text-center'>
-                                        <h6><span class='type ". $innerRow[$y]['fast_type']. "'>". $innerRow[$y]['fast_type']. "</span> " . $innerRow[$y]['fast']."</h6>
-                                        <h6><span class='type ". $innerRow[$y]['charged_type']. "'>". $innerRow[$y]['charged_type'] . "</span> " .$innerRow[$y]['charged']."</h6>
-                                        <hr/>
-                                    </div>
+                                        <!-- Counter pic-->
+                                        <div class='col text-center'>
+                                            <img style='width:64px;height:64px;' src='".$innerRow[$y]['img']. "'/>
+                                            <p>". $innerRow[$y]['name']."</p>
+                                        </div>
+                                        
+                                        <!-- Moves -->
+                                        <div class='col text-center'>
+                                            <h6><span class='type ". $innerRow[$y]['fast_type']. "'>". $innerRow[$y]['fast_type']. "</span> " . $innerRow[$y]['fast']."</h6>
+                                            <h6><span class='type ". $innerRow[$y]['charged_type']. "'>". $innerRow[$y]['charged_type'] . "</span> " .$innerRow[$y]['charged']."</h6>
+                                            <hr/>
+                                        </div>
 
-                                    <!-- Description -->
-                                    <p class = 'text-center'>". $innerRow[$y]['description']. "</p>
-                                </div>
-                                <hr/>";
+                                        <!-- Description -->
+                                        <p class = 'text-center'>". $innerRow[$y]['description']. "</p>
+                                    </div>
+                                    <hr/>";
                         }
                         include("raids.cardFooter.php");
                     }
                 }
             ?>
-            <div class = 'row'>
+            <h4 class='text-center'>The last two tiers of raids are borderline trivial to choose counters for, so they aren't displayed</h4>
+            <?php
+                for($tierCount = 2; $tierCount>0; $tierCount--){
+            
+        echo "  <h2 class = 'text-left'>Tier ". $tierCount. "</h2>
+                <hr/>
+                <div class='row'>
+                    <div class='col text-center'>
+                        <div class='card border-light'>
+                        <!--Overview Header-->
+                        <div class='card-header bg-danger text-center text-white'>
+                            <div class='row'>
+                                <div class='col'>
+                                    <h5>Boss List</h5>
+                                </div>
+                            </div>
+                        </div>";
+                    $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount);
+                    $prep_stmt->execute();
+                    $row = $prep_stmt->fetchAll();
+                    $count = $prep_stmt->rowCount();
+
+                echo "  <div class='card-body'>
+                            <div class ='row'>
+                                ";
+                    for($i = 0; $i < $count; $i++){
+                    echo"       <div class = 'col'>
+                                    <img style='width:122px;height:122px;' src='". $row[$i]['img']."'/>
+                                    <h2 class='card-title'>". $row[$i]['name']. "</h2>
+                                    <span class='type ". $row[$i]['main']."'>". $row[$i]['main']. "</span> ";
+                                    if($row[$i]['secondary'] != NULL){
+                                        echo "<span class='type ". $row[$i]['secondary']."'>". $row[$i]['secondary']. "</span>";
+                                    }
+                            echo "  <div class='row'>
+                                        <div class='col'>
+                                            <h6>Normal</h6>
+                                            <hr/>
+                                            ". $row[$i]['min_cp']. "-". $row[$i]['max_cp']. "cp
+                                        </div>
+                                        <div class='col'>
+                                            <h6>Boosted</h6>
+                                            <hr/>
+                                            ". $row[$i]['min_wb']. "-". $row[$i]['max_wb']. "cp
+                                        </div>
+                                    </div>
+                                    <hr/>";
+                        echo   "</div>";
+                    }
+                echo "      </div>
+                        </div>
+                    </div>
+                    <br/>";
+                }
+            ?>
         </div>
     </body>
 </html>
