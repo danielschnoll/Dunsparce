@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    //$cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    //$cleardb_server   = $cleardb_url["host"];
+    //$cleardb_username = $cleardb_url["user"];
+    //$cleardb_password = $cleardb_url["pass"];
+    //$cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        //$conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -27,9 +28,11 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Dunsparce</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+                <a class="navbar-brand" href="#">Dunsparce</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="index.php">Home</a>
@@ -130,42 +133,6 @@
             <hr/>
             <div class = 'row'>
                 <div class = 'col'>
-                <h1>Site News</h1>
-                <hr/>
-                <?php
-                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Site News'");
-                    $prep_stmt->execute();
-                    $row = $prep_stmt->fetchAll();
-                    $count = $prep_stmt->rowCount();
-                    for($x = 0; $x < $count; $x++) {
-                        echo "<div class ='card border-light'>
-                                <div class='card-header bg-danger text-white'>
-                                    <div class='row'>
-                                        <div class='col'>
-                                            <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class = 'card-body'>
-                                    <div class = 'row'>
-                                        <div class = 'col'>
-                                            <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
-                                        </div>
-                                        <div class = 'col'>
-                                            <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". $row[$x]['posted']. "</h5>
-                                        </div>
-                                    </div>
-                                    
-                                    <hr/>
-                                    <p class='card-text'>". $row[$x]['text']. "</p>
-                                </div>
-                            </div>
-                            <br/>";
-                    }
-                ?>
-                </div>
-                <div class = 'col'>
                     <h1>Game Updates</h1>
                     <hr/>
                     <?php
@@ -200,6 +167,42 @@
                             <br/>";
                         }
                     ?>
+                </div>
+                <div class = 'col'>
+                <h1>Site News</h1>
+                <hr/>
+                <?php
+                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Site News'");
+                    $prep_stmt->execute();
+                    $row = $prep_stmt->fetchAll();
+                    $count = $prep_stmt->rowCount();
+                    for($x = 0; $x < $count; $x++) {
+                        echo "<div class ='card border-light'>
+                                <div class='card-header bg-danger text-white'>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class = 'card-body'>
+                                    <div class = 'row'>
+                                        <div class = 'col'>
+                                            <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                        </div>
+                                        <div class = 'col'>
+                                            <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". $row[$x]['posted']. "</h5>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr/>
+                                    <p class='card-text'>". $row[$x]['text']. "</p>
+                                </div>
+                            </div>
+                            <br/>";
+                    }
+                ?>
                 </div>
             </div>
         </div>

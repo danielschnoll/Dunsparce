@@ -8,7 +8,8 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        //$conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -171,9 +172,11 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Dunsparce</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+                <a class="navbar-brand" href="index.php">Dunsparce</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Home</a>
