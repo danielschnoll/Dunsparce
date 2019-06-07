@@ -67,6 +67,7 @@
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
+                var_dump($count);
                 for($x = 0; $x < $count; $x++) {
                     echo "<div class ='card border-light'>
                             <div class='card-header bg-warning'>
