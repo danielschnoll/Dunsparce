@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <?php 
     //Get Heroku ClearDB connection information
     $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
@@ -7,10 +6,6 @@
     $cleardb_username = $cleardb_url["user"];
     $cleardb_password = $cleardb_url["pass"];
     $cleardb_db       = substr($cleardb_url["path"],1);
-
-
-    $active_group = 'default';
-    $query_builder = TRUE;
 
     try {
         $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
@@ -66,7 +61,6 @@
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
-                var_dump($count);
                 for($x = 0; $x < $count; $x++) {
                     echo "<div class ='card border-light'>
                             <div class='card-header bg-warning'>
