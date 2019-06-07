@@ -144,9 +144,6 @@
 
     //NEWS
     if(isset($_POST['NewPost'])){
-        var_dump($_POST['date']);
-        var_dump($_POST['category']);
-        var_dump($_POST['text']);
         $stmt = $conn->prepare("INSERT INTO updates (id, title, posted, dateStart, dateEnd, category, text) 
                                             VALUES (id, :title, :posted, :dateStart, :dateEnd, :category, :text)");
         $stmt->execute(array(':title' => $_POST['title'], ':posted' => $_POST['date'], ':dateStart' => $_POST['dateStart'], 
@@ -570,7 +567,8 @@
                                     <option name = "Community Day" value = "Community Day">Community Day</option>
                                     <option name = "In-Life" value = "In-Life">In-Life Event</option>
                                     <option name = "In-Game Event" value = "In-Game Event">In-Game Event</option>
-                                    <option name = "News" value = "News">Game News</option>
+                                    <option name = "Game Update" value = "Game Update">Game Update</option>
+                                    <option name = "Site News" value = "Site News">Site News</option>
                                 </select>
                             </div>
                             <div class = 'col'>
