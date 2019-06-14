@@ -136,11 +136,10 @@
                     <h1>Game Updates</h1>
                     <hr/>
                     <?php
-                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Game Update' ORDER BY create_date_formatted DESC");
+                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 15 DAY AND NOW() AND category='Game Update' ORDER BY create_date_formatted DESC");
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
-                    $count = $prep_stmt->rowCount();
-                    for($x = 0; $x < $count; $x++) {
+                    for($x = 0; $x < 4; $x++) {
                         echo "<div class ='card border-light'>
                                 <div class='card-header bg-primary text-white'>
                                     <div class='row'>
@@ -172,7 +171,7 @@
                 <h1>Site News</h1>
                 <hr/>
                 <?php
-                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Site News'");
+                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 15 DAY AND NOW() AND category='Site News' ORDER BY create_date_formatted DESC");
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
