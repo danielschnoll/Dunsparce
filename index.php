@@ -136,7 +136,7 @@
                     <h1>Game Updates</h1>
                     <hr/>
                     <?php
-                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Game Update' ORDER BY DESC");
+                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND category='Game Update' ORDER BY create_date_formatted DESC");
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
