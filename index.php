@@ -50,7 +50,7 @@
                 </div>
             </nav>
             <div class="jumbotron">
-                <h1 class = "text-center">Dunsparce.net - Home</h1>
+                <h1 class = "text-center">News and Events</h1>
             </div>    
         </header>
         <script>
