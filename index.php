@@ -8,8 +8,8 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        //$conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        //$conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -72,24 +72,24 @@
         <div style="width:95%;" class="container">
             <div class = 'row'>
                 <div class = 'col'>
-                    <p>Show/Hide News Sections</p>
+                    <h3>Show/Hide News Sections</h3>
                 </div>
             </div>
             <div class = 'row text-center'>
                 <div class = 'col'>
-                    <button id = 'b1'>Current Events</button>
+                    <button type="button" class="btn btn-secondary" id = 'b1'>Current Events</button>
                 </div>
                 <div class = 'col'>
-                    <button id = 'b2'>Upcoming Events</button>
+                    <button type="button" class="btn btn-secondary" id = 'b2'>Upcoming Events</button>
                 </div>
             </div>
             <br/>
             <div class ='row text-center'>
                 <div class = 'col'>
-                    <button id = 'b3'>Game Updates</button>
+                    <button type="button" class="btn btn-secondary" id = 'b3'>Game Updates</button>
                 </div>
                 <div class = 'col'>
-                    <button id = 'b4'>Site News</button>
+                    <button type="button" class="btn btn-secondary" id = 'b4'>Site News</button>
                 </div>
             </div>
             <br/>
