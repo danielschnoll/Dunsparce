@@ -77,19 +77,19 @@
             </div>
             <div class = 'row text-center'>
                 <div class = 'col'>
-                    <button type="button" class="btn btn-secondary" id = 'b1'>Current Events</button>
+                    <button type="button" class="btn btn-warning" id = 'b1'>Current Events</button>
                 </div>
                 <div class = 'col'>
-                    <button type="button" class="btn btn-secondary" id = 'b2'>Upcoming Events</button>
+                    <button type="button" class="btn btn-success" id = 'b2'>Upcoming Events</button>
                 </div>
             </div>
             <br/>
             <div class ='row text-center'>
                 <div class = 'col'>
-                    <button type="button" class="btn btn-secondary" id = 'b3'>Game Updates</button>
+                    <button type="button" class="btn btn-primary" id = 'b3'>Game Updates</button>
                 </div>
                 <div class = 'col'>
-                    <button type="button" class="btn btn-secondary" id = 'b4'>Site News</button>
+                    <button type="button" class="btn btn-danger" id = 'b4'>Site News</button>
                 </div>
             </div>
             <br/>
