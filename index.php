@@ -22,7 +22,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
@@ -53,11 +53,50 @@
                 <h1 class = "text-center">Dunsparce.net - Home</h1>
             </div>    
         </header>
-
+        <script>
+            $(document).ready(function(){
+                $("#b1").click(function(){
+                    $("#curr").fadeToggle();
+                });
+                $("#b2").click(function(){
+                    $("#upcoming").fadeToggle();
+                });
+                $("#b3").click(function(){
+                    $("#game").fadeToggle();
+                });
+                $("#b4").click(function(){
+                    $("#site").fadeToggle();
+                });
+            });
+        </script>
         <div style="width:95%;" class="container">
-            <?php
-                echo"<div class = 'row'>
+            <div class = 'row'>
                 <div class = 'col'>
+                    <p>Show/Hide News Sections</p>
+                </div>
+            </div>
+            <div class = 'row text-center'>
+                <div class = 'col'>
+                    <button id = 'b1'>Current Events</button>
+                </div>
+                <div class = 'col'>
+                    <button id = 'b2'>Upcoming Events</button>
+                </div>
+            </div>
+            <br/>
+            <div class ='row text-center'>
+                <div class = 'col'>
+                    <button id = 'b3'>Game Updates</button>
+                </div>
+                <div class = 'col'>
+                    <button id = 'b4'>Site News</button>
+                </div>
+            </div>
+            <br/>
+            <?php
+                echo"
+                <div class = 'row' >
+                <div class = 'col' id = 'curr'>
                 <h1>Current Events</h1>
                 <hr/>";
                 $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() BETWEEN dateStart AND dateEnd ");
@@ -93,7 +132,7 @@
                 }
                 
                 echo "</div>
-                    <div class = 'col'>
+                    <div class = 'col' id ='upcoming'>
                     <h1>Upcoming Events</h1>
                     <hr/>";
                 $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE dateStart > CURDATE()");
@@ -132,14 +171,18 @@
             </div>
             <hr/>
             <div class = 'row'>
-                <div class = 'col'>
+                <div class = 'col' id = 'game'>
                     <h1>Game Updates</h1>
                     <hr/>
                     <?php
                     $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 15 DAY AND NOW() AND category='Game Update' ORDER BY create_date_formatted DESC");
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
-                    for($x = 0; $x < 4; $x++) {
+                    $count = $prep_stmt->rowCount();
+                    if($count >= 4){
+                        $count = 4;
+                    }
+                    for($x = 0; $x < $count; $x++) {
                         echo "<div class ='card border-light'>
                                 <div class='card-header bg-primary text-white'>
                                     <div class='row'>
@@ -167,7 +210,7 @@
                         }
                     ?>
                 </div>
-                <div class = 'col'>
+                <div class = 'col' id='site'>
                 <h1>Site News</h1>
                 <hr/>
                 <?php
