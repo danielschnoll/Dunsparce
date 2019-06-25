@@ -61,7 +61,7 @@
                 for($tierCount = 5; $tierCount > 2; $tierCount--){
                     echo "<h2>Tier ".$tierCount. "</h2>
                           <hr/>";
-                    $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount);
+                    $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount ORDER BY dex_num);
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
