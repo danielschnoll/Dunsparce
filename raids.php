@@ -8,8 +8,8 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        //$conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        //$conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -294,7 +294,7 @@
             <h4 class='text-center'>The last two tiers of raids are borderline trivial to choose counters for, so they aren't displayed</h4>
             <?php
                 for($tierCount = 2; $tierCount>0; $tierCount--){
-            
+
         echo "  <h2 class = 'text-left' id=tier".$tierCount.">Tier ". $tierCount. "</h2>
                 <hr/>
                 <div class='row' id=tier".$tierCount.">
@@ -317,6 +317,11 @@
                             <div class ='row'>
                                 ";
                     for($i = 0; $i < $count; $i++){
+                        $fast = $row[$i]['fastMoveList'];
+                        $fastArr = preg_split ("/\,/", $fast);
+                        $charged = $row[$i]['chargedMoveList'];
+                        $chargedArr = preg_split ("/\,/", $charged);
+
                     echo"       <div class = 'col'>
                                     <img style='width:122px;height:122px;' src='". $row[$i]['img']."'/>
                                     <h2 class='card-title'>". $row[$i]['name']. "</h2>
@@ -336,7 +341,36 @@
                                             ". $row[$i]['min_wb']. "-". $row[$i]['max_wb']. "cp
                                         </div>
                                     </div>
-                                    <hr/>";
+                                    <hr/>
+                                    
+                                    <div class = 'row '>
+                                        <!-- Fast -->
+                                        <div class = 'col text-left'>
+                                            <h6>Fast Moves:</h6>
+                                        </div>
+                                    </div>
+
+                                    <div class = 'row'>
+                                        <div class ='col text-center'>";
+                                        for($j = 0; $j < sizeof($fastArr); $j+=2){
+                                            echo $fastArr[$j]." <span class='type ". $fastArr[$j+1]. "'>". $fastArr[$j+1]."</span>
+                                            <br/>";
+                                        }
+                                echo "
+                                        <br/>
+                                        <div class = 'row '>
+                                            <!-- Charged -->
+                                            <div class = 'col text-left'>
+                                                <h6>Charged Moves:</h6>
+                                            </div>
+                                        </div>";
+
+                                        for($j = 0; $j < sizeof($chargedArr); $j+=2){
+                                            echo $chargedArr[$j]." <span class='type ". $chargedArr[$j+1]. "'>". $chargedArr[$j+1]."</span>
+                                            <br/>";
+                                        }
+                                    echo "</div>
+                                    </div>";
                         echo   "</div>";
                     }
                 echo "      </div>
@@ -348,3 +382,4 @@
         </div>
     </body>
 </html>
+
