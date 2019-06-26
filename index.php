@@ -72,7 +72,7 @@
         <div style="width:95%;" class="container">
             <div class = 'row'>
                 <div class = 'col'>
-                    <h3>Show/Hide News Sections</h3>
+                    <h4>Show/Hide Sections</h4>
                 </div>
             </div>
             <div class = 'row text-center'>

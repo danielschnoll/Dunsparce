@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="css/types.css">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     </head>
@@ -55,11 +55,57 @@
                 <h1 class = "text-center">Active Raid Bosses</h1>
             </div>    
         </header>
-
+        <script>
+            $(document).ready(function(){
+                $("#b1").click(function(){
+                    $("h2#tier1").fadeToggle();
+                    $("div#tier1").fadeToggle();
+                });
+                $("#b2").click(function(){
+                    $("h2#tier2").fadeToggle();
+                    $("div#tier2").fadeToggle();
+                });
+                $("#b3").click(function(){
+                    $("h2#tier3").fadeToggle();
+                    $("div#tier3").fadeToggle();
+                });
+                $("#b4").click(function(){
+                    $("h2#tier4").fadeToggle();
+                    $("div#tier4").fadeToggle();
+                });
+                $("#b5").click(function(){
+                    $("h2#tier5").fadeToggle();
+                    $("div#tier5").fadeToggle();
+                });
+            });
+        </script>
         <div class="container">
+            <div class = 'row'>
+                <div class = 'col'>
+                    <h4>Show/Hide Sections</h4>
+                </div>
+            </div>
+            <div class = 'row text-center'>
+                <div class = 'col'>
+                    <button type="button" class="btn btn-secondary" id = 'b1'>Tier 1</button>
+                </div>
+                <div class = 'col'>
+                    <button type="button" class="btn btn-secondary" id = 'b2'>Tier 2</button>
+                </div>
+                <div class = 'col'>
+                    <button type="button" class="btn btn-secondary" id = 'b3'>Tier 3</button>
+                </div>
+                <div class = 'col'>
+                    <button type="button" class="btn btn-secondary" id = 'b4'>Tier 4</button>
+                </div>
+                <div class = 'col'>
+                    <button type="button" class="btn btn-secondary" id = 'b5'>Tier 5</button>
+                </div>
+            </div>
+            <br/>
             <?php
                 for($tierCount = 5; $tierCount > 2; $tierCount--){
-                    echo "<h2>Tier ".$tierCount. "</h2>
+                    echo "<h2 id = tier".$tierCount.">Tier ".$tierCount. "</h2>
                           <hr/>";
                     $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 AND tier=".$tierCount);
                     $prep_stmt->execute();
@@ -86,7 +132,7 @@
                         }
                         echo " 
                             <!--Overview-->
-                            <div class='row'>
+                            <div class='row' id=tier".$tierCount.">
                                 <div class='col text-center'>
                                     <div class='card border-light'>
                                     <!--Overview Header-->
@@ -249,9 +295,9 @@
             <?php
                 for($tierCount = 2; $tierCount>0; $tierCount--){
             
-        echo "  <h2 class = 'text-left'>Tier ". $tierCount. "</h2>
+        echo "  <h2 class = 'text-left' id=tier".$tierCount.">Tier ". $tierCount. "</h2>
                 <hr/>
-                <div class='row'>
+                <div class='row' id=tier".$tierCount.">
                     <div class='col text-center'>
                         <div class='card border-light'>
                         <!--Overview Header-->
