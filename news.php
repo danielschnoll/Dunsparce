@@ -8,7 +8,7 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
         $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
@@ -54,19 +54,21 @@
             </div>    
         </header>
         <div style="width:95%;" class="container">
-            <?php
-                echo"
-                <div class = 'row' >
-                <div class = 'col' id = 'curr'>
-                <h1>Current Events</h1>
-                <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() BETWEEN dateStart AND dateEnd ");
+        <div class = 'row'>
+            <div class = 'col' id = 'game'>
+                <h1>Game Updates</h1>
+                <hr/>
+                <?php
+                $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 15 DAY AND NOW() AND category='Game Update' ORDER BY create_date_formatted DESC");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
+                if($count >= 4){
+                    $count = 4;
+                }
                 for($x = 0; $x < $count; $x++) {
                     echo "<div class ='card border-light'>
-                            <div class='card-header bg-warning'>
+                            <div class='card-header bg-primary text-white'>
                                 <div class='row'>
                                     <div class='col'>
                                         <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
@@ -80,8 +82,7 @@
                                         <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
                                     </div>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "<br/>
-                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                        <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". $row[$x]['posted']. "</h5>
                                     </div>
                                 </div>
                                 
@@ -90,46 +91,46 @@
                             </div>
                         </div>
                         <br/>";
-                }
-                
-                echo "</div>
-                    </div>
-                    <div class = 'row'>
-                    <div class = 'col' id ='upcoming'>
-                    <h1>Upcoming Events</h1>
-                    <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE dateStart > CURDATE()");
-                $prep_stmt->execute();
-                $row = $prep_stmt->fetchAll();
-                $count = $prep_stmt->rowCount();
-                for($x = 0; $x < $count; $x++) {
-                    echo "<div class ='card border-light'>
-                            <div class='card-header bg-success text-white'>
-                                <div class='row'>
-                                    <div class='col'>
-                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                    }
+                ?>
+            </div>
+            </div>
+            <div class = 'row'>
+                <div class = 'col' id='site'>
+                <h1>Site News</h1>
+                <hr/>
+                <?php
+                    $prep_stmt = $conn->prepare("SELECT *, DATE_FORMAT(posted, '%m/%d/%y') as create_date_formatted FROM updates WHERE posted BETWEEN NOW() - INTERVAL 15 DAY AND NOW() AND category='Site News' ORDER BY create_date_formatted DESC");
+                    $prep_stmt->execute();
+                    $row = $prep_stmt->fetchAll();
+                    $count = $prep_stmt->rowCount();
+                    for($x = 0; $x < $count; $x++) {
+                        echo "<div class ='card border-light'>
+                                <div class='card-header bg-danger text-white'>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class = 'card-body'>
-                                <div class = 'row'>
-                                    <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                <div class = 'card-body'>
+                                    <div class = 'row'>
+                                        <div class = 'col'>
+                                            <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                        </div>
+                                        <div class = 'col'>
+                                            <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". $row[$x]['posted']. "</h5>
+                                        </div>
                                     </div>
-                                    <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "<br/>
-                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
-                                    </div>
+                                    
+                                    <hr/>
+                                    <p class='card-text'>". $row[$x]['text']. "</p>
                                 </div>
-                                
-                                <hr/>
-                                <p class='card-text'>". $row[$x]['text']. "</p>
                             </div>
-                        </div>
-                        <br/>";
-                }
-            ?>
+                            <br/>";
+                    }
+                ?>
                 </div>
             </div>
         </div>

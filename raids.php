@@ -8,7 +8,7 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        //$conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
         $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
@@ -303,7 +303,7 @@
                         <!--Overview Header-->
                         <div class='card-header bg-danger text-center text-white'>
                             <div class='row'>
-                                <div class='col'>
+                                <div class='col-'>
                                     <h5>Boss List</h5>
                                 </div>
                             </div>
@@ -312,71 +312,76 @@
                     $prep_stmt->execute();
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
-
-                echo "  <div class='card-body'>
-                            <div class ='row'>
-                                ";
-                    for($i = 0; $i < $count; $i++){
+                echo "  <div class='card-body'>";
+                    for($i = 0; $i < $count; $i+=2){
                         $fast = $row[$i]['fastMoveList'];
                         $fastArr = preg_split ("/\,/", $fast);
                         $charged = $row[$i]['chargedMoveList'];
                         $chargedArr = preg_split ("/\,/", $charged);
+                        echo "<div class ='row'>";
+                        for($j = $i; $j < $i+2; $j++){
+                            if($j >= $count){
+                                break;
+                            }
 
                     echo"       <div class = 'col'>
-                                    <img style='width:122px;height:122px;' src='". $row[$i]['img']."'/>
-                                    <h2 class='card-title'>". $row[$i]['name']. "</h2>
-                                    <span class='type ". $row[$i]['main']."'>". $row[$i]['main']. "</span> ";
-                                    if($row[$i]['secondary'] != NULL){
-                                        echo "<span class='type ". $row[$i]['secondary']."'>". $row[$i]['secondary']. "</span>";
+                                    <img style='width:122px;height:122px;' src='". $row[$j]['img']."'/>
+                                    <h2 class='card-title'>". $row[$j]['name']. "</h2>
+                                    <span class='type ". $row[$j]['main']."'>". $row[$j]['main']. "</span> ";
+                                    if($row[$j]['secondary'] != NULL){
+                                        echo "<span class='type ". $row[$j]['secondary']."'>". $row[$j]['secondary']. "</span>";
                                     }
-                            echo "  <div class='row'>
+                            echo "  <div class='row'> <!-- START CP ROW -->
                                         <div class='col'>
                                             <h6>Normal</h6>
                                             <hr/>
-                                            ". $row[$i]['min_cp']. "-". $row[$i]['max_cp']. "cp
+                                            ". $row[$j]['min_cp']. "-". $row[$j]['max_cp']. "cp
                                         </div>
                                         <div class='col'>
                                             <h6>Boosted</h6>
                                             <hr/>
-                                            ". $row[$i]['min_wb']. "-". $row[$i]['max_wb']. "cp
+                                            ". $row[$j]['min_wb']. "-". $row[$j]['max_wb']. "cp
                                         </div>
-                                    </div>
+                                    </div> <!-- END CP ROW -->
                                     <hr/>
                                     
-                                    <div class = 'row '>
+                                    
+                                    <div class = 'row '> <!-- Start of Moves List -->
                                         <!-- Fast -->
                                         <div class = 'col text-left'>
                                             <h6>Fast Moves:</h6>
                                         </div>
                                     </div>
-
                                     <div class = 'row'>
                                         <div class ='col text-center'>";
-                                        for($j = 0; $j < sizeof($fastArr); $j+=2){
-                                            echo $fastArr[$j]." <span class='type ". $fastArr[$j+1]. "'>". $fastArr[$j+1]."</span>
+                                        for($k = 0; $k < sizeof($fastArr); $k+=2){
+                                            echo $fastArr[$k]." <span class='type ". $fastArr[$k+1]. "'>". $fastArr[$k+1]."</span>
                                             <br/>";
                                         }
-                                echo "
-                                        <br/>
-                                        <div class = 'row '>
-                                            <!-- Charged -->
-                                            <div class = 'col text-left'>
-                                                <h6>Charged Moves:</h6>
-                                            </div>
-                                        </div>";
+                              echo "        <br/>
+                                            <div class = 'row '>
+                                                <!-- Charged -->
+                                                <div class = 'col text-left'>
+                                                    <h6>Charged Moves:</h6>
+                                                </div>
+                                            </div>";
 
-                                        for($j = 0; $j < sizeof($chargedArr); $j+=2){
-                                            echo $chargedArr[$j]." <span class='type ". $chargedArr[$j+1]. "'>". $chargedArr[$j+1]."</span>
+                                        for($k = 0; $k < sizeof($chargedArr); $k+=2){
+                                            echo $chargedArr[$k]." <span class='type ". $chargedArr[$k+1]. "'>". $chargedArr[$k+1]."</span>
                                             <br/>";
                                         }
-                                    echo "</div>
-                                    </div>";
-                        echo   "</div>";
+                                echo "  </div>
+                                    </div> <!-- End of Moves List -->
+                                </div>";
+                        }
+                        echo "</div>";
+                        if($i < $count-2){
+                        echo "  <hr/>
+                                <hr/>";
+                        }
+
                     }
-                echo "      </div>
-                        </div>
-                    </div>
-                    <br/>";
+                    include("raids.cardFooter.php");
                 }
             ?>
         </div>
