@@ -117,7 +117,7 @@
                     <div class = 'col' id ='upcoming'>
                     <h1>Upcoming Events</h1>
                     <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateStart");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CURDATE() < dateStart");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
