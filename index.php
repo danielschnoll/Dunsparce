@@ -79,7 +79,7 @@
                 <div class = 'col' id = 'curr'>
                 <h1>Current Events</h1>
                 <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() BETWEEN dateStart AND dateEnd ");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateEnd AND NOW() > dateStart ");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
@@ -117,7 +117,7 @@
                     <div class = 'col' id ='upcoming'>
                     <h1>Upcoming Events</h1>
                     <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE dateStart > CURDATE()");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateStart");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();

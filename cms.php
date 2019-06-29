@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php
     //Get Heroku ClearDB connection information
-    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    // $cleardb_server   = $cleardb_url["host"];
-    // $cleardb_username = $cleardb_url["user"];
-    // $cleardb_password = $cleardb_url["pass"];
-    // $cleardb_db       = substr($cleardb_url["path"],1);
+    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $cleardb_server   = $cleardb_url["host"];
+    $cleardb_username = $cleardb_url["user"];
+    $cleardb_password = $cleardb_url["pass"];
+    $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -153,10 +153,11 @@
 
     //NEWS
     if(isset($_POST['NewPost'])){
-        $stmt = $conn->prepare("INSERT INTO updates (id, title, posted, dateStart, dateEnd, category, text) 
-                                            VALUES (id, :title, :posted, :dateStart, :dateEnd, :category, :text)");
+        $stmt = $conn->prepare("INSERT INTO updates (id, title, posted, dateStart, dateEnd, category, text, postlink, img) 
+                                            VALUES (id, :title, :posted, :dateStart, :dateEnd, :category, :text, :postlink, :img)");
         $stmt->execute(array(':title' => $_POST['title'], ':posted' => $_POST['date'], ':dateStart' => $_POST['dateStart'], 
-                            ':dateEnd' => $_POST['dateEnd'], ':category' => $_POST['category'], ':text' => $_POST['text']));
+                            ':dateEnd' => $_POST['dateEnd'], ':category' => $_POST['category'], ':text' => $_POST['text'], 
+                            ':postlink' => $_POST['postlink'], ':img' => $_POST['img']));
     }
     
 ?>
@@ -589,11 +590,14 @@
                                 <label>Title</label>
                                 <input name="title" type="text"/>
                             </div>
+                        </div>
+                        <div class = 'row'>
                             <div class = 'col'>
-                                <label>Description</label>
-                                <input name="text" type="text"/>
+                                <label>Description</label><br/>
+                                <input style='width:400px;' name="text" type="text"/>
                             </div>
                         </div>
+                        <br/>
                         <div class = 'row'>
                             <div class = 'col'>
                                 <label>Posted On</label>
@@ -601,13 +605,26 @@
                             </div>
                             <div class = 'col'>
                                 <label>Event Start</label>
-                                <input name="dateStart" type="date"/>
+                                <input name="dateStart" type="datetime-local"/>
                             </div>
                             <div class = 'col'>
                                 <label>Event End</label>
-                                <input name="dateEnd" type="date"/>
+                                <input name="dateEnd" type="datetime-local"/>
                             </div>
                         </div>
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Post Link</label><br/>
+                                <input style='width:400px;' name="postlink" type="text"/>
+                            </div>
+                        </div>
+                        <div class = 'row'>
+                            <div class = 'col'>
+                                <label>Img URL</label><br/>
+                                <input style='width:400px;' name="img" type="text"/>
+                            </div>
+                        </div>
+                        <br/>
                         <input name="NewPost" type='submit' value = "Submit"/>
                     </form>
                 </div>
