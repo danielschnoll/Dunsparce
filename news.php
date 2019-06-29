@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $cleardb_server   = $cleardb_url["host"];
+    // $cleardb_username = $cleardb_url["user"];
+    // $cleardb_password = $cleardb_url["pass"];
+    // $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -34,8 +34,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynav">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Events</a>
+                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home</a>
+                            <a class="nav-link" href="news.php">News</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="raids.php">Raids</a>
@@ -50,7 +53,7 @@
                 </div>
             </nav>
             <div class="jumbotron">
-                <h1 class = "text-center">News and Events</h1>
+                <h1 class = "text-center">News</h1>
             </div>    
         </header>
         <div style="width:95%;" class="container">

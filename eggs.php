@@ -59,8 +59,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynav">
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                            <a class="nav-link" href="index.php">Home</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.php">News</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="raids.php">Raids</a>

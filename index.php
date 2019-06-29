@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $cleardb_server   = $cleardb_url["host"];
+    // $cleardb_username = $cleardb_url["user"];
+    // $cleardb_password = $cleardb_url["pass"];
+    // $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        //$conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -25,6 +25,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <style>
+            .card {
+                margin: 0 auto;
+                float: none; 
+                margin-bottom: 10px; 
+                width:80%;
+            }
+            .bg-img{
+                height: 100%;
+                filter: blur(8px);
+                -webkit-filter: blur(8px);
+                background-position: center;
+                background-image: url("https://cdn.vox-cdn.com/thumbor/6tVFspEcl0EuaGs3FGRfYbLgil4=/0x0:1920x1080/1520x1013/filters:focal(807x387:1113x693):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/64137076/mudkip_community_day.0.jpg");
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -35,7 +50,10 @@
                 <div class="collapse navbar-collapse" id="mynav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.php">Home</a>
+                            <a class="nav-link" href="index.php">Events</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="news.php">News</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="raids.php">Raids</a>
@@ -50,13 +68,13 @@
                 </div>
             </nav>
             <div class="jumbotron">
-                <h1 class = "text-center">News and Events</h1>
+                <h1 class = "text-center">Events</h1>
             </div>    
         </header>
         <div style="width:95%;" class="container">
             <?php
                 echo"
-                <div class = 'row' >
+                <div class = 'row''>
                 <div class = 'col' id = 'curr'>
                 <h1>Current Events</h1>
                 <hr/>";
@@ -103,28 +121,31 @@
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
                 for($x = 0; $x < $count; $x++) {
-                    echo "<div class ='card border-light'>
-                            <div class='card-header bg-success text-white'>
+                    echo "<div class ='card border-light text-black'>
+                            <div class='card-header bg-secondary text-white'>
                                 <div class='row'>
                                     <div class='col'>
                                         <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
                                     </div>
                                 </div>
                             </div>
+                            <div class = 'bg-img'></div>
 
-                            <div class = 'card-body'>
+                            <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
+                            
                                 <div class = 'row'>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                        <span style='font-weight:bold;' class = 'card-subtitle'>Category: </span>". $row[$x]['category'] ."
                                     </div>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "<br/>
-                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                        <span style='font-weight:bold;'>Start: </span>". date('m/d/Y h:i a', strtotime($row[$x]['dateStart'])) . "<br/>
+                                        <span style='font-weight:bold;'>End: </span>". date('m/d/Y h:i a', strtotime($row[$x]['dateEnd'])). "
                                     </div>
                                 </div>
                                 
                                 <hr/>
-                                <p class='card-text'>". $row[$x]['text']. "</p>
+                                <p class='card-text'>". $row[$x]['short-desc']. "</p>
+                                <p class='card-text' id ='long-desc'>". $row[$x]['long-desc']. "</p>
                             </div>
                         </div>
                         <br/>";
