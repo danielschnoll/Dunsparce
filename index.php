@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $cleardb_server   = $cleardb_url["host"];
+    // $cleardb_username = $cleardb_url["user"];
+    // $cleardb_password = $cleardb_url["pass"];
+    // $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -30,7 +30,7 @@
                 margin: 0 auto;
                 float: none; 
                 margin-bottom: 10px; 
-                width:80%;
+                width:90%;
             }
             .bg-img{
                 height: 100%;
@@ -42,6 +42,7 @@
         </style>
     </head>
     <body>
+        
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
                 <a class="navbar-brand" href="#">Dunsparce</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -144,8 +145,8 @@
                                 </div>
                                 
                                 <hr/>
-                                <p class='card-text'>". $row[$x]['short-desc']. "</p>
-                                <p class='card-text' id ='long-desc'>". $row[$x]['long-desc']. "</p>
+                                <p class='card-text'>". $row[$x]['text']. "</p>
+                                <input type='button' class='btn btn-warning' value='Official Post' onclick='window.location=\"".$row[$x]['postlink'] ."\"'>
                             </div>
                         </div>
                         <br/>";
