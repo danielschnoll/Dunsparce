@@ -79,14 +79,14 @@
                 <div class = 'col' id = 'curr'>
                 <h1>Current Events</h1>
                 <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'GMT','US/Eastern') < dateEnd AND CONVERT_TZ(NOW(),'GMT','US/Eastern') > dateStart ");
-                // $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateEnd AND NOW() > dateStart ");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'GMT','US/Eastern') < dateEnd AND CONVERT_TZ(NOW(),'GMT','US/Eastern') > dateStart ORDER BY dateStart DESC");
+                // $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateEnd AND NOW() > dateStart ORDER BY dateStart DESC");
 
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
                 for($x = 0; $x < $count; $x++) {
-                    echo "<div class ='card border-light'>
+                    echo "<div class ='card border-light text-black'>
                             <div class='card-header bg-warning'>
                                 <div class='row'>
                                     <div class='col'>
@@ -95,14 +95,14 @@
                                 </div>
                             </div>
 
-                            <div class = 'card-body'>
+                            <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
                                 <div class = 'row'>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
+                                        <span style='font-weight:bold;' class = 'card-subtitle'>Category: </span>". $row[$x]['category'] ."
                                     </div>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'text-muted'>Start: </span>". $row[$x]['dateStart']. "<br/>
-                                        <span style='font-weight:bold;' class = 'text-muted'>End: </span>". $row[$x]['dateEnd']. "
+                                        <span style='font-weight:bold;'>Start: </span>". $row[$x]['dateStart']. "<br/>
+                                        <span style='font-weight:bold;'>End: </span>". $row[$x]['dateEnd']. "
                                     </div>
                                 </div>
                                 
@@ -119,9 +119,9 @@
                     <div class = 'col' id ='upcoming'>
                     <h1>Upcoming Events</h1>
                     <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'SYSTEM','US/Eastern') < dateStart ");
-                // $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateStart ");
-                
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'SYSTEM','US/Eastern') < dateStart ORDER BY dateStart DESC");
+                // $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateStart ORDER BY dateStart DESC");
+
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
