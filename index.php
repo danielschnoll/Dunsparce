@@ -135,10 +135,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class = 'bg-img'></div>
-
-                            <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
                             
+                            <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
                                 <div class = 'row'>
                                     <div class = 'col'>
                                         <span style='font-weight:bold;' class = 'card-subtitle'>Category: </span>". $row[$x]['category'] ."
