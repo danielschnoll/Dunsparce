@@ -87,10 +87,10 @@
                 $count = $prep_stmt->rowCount();
                 for($x = 0; $x < $count; $x++) {
                     echo "<div class ='card border-light text-black'>
-                            <div class='card-header bg-warning'>
+                            <div class='card-header bg-primary'>
                                 <div class='row'>
                                     <div class='col'>
-                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                        <h3 class='card-title text-center text-white'>". $row[$x]['title']. "</h4>
                                     </div>
                                 </div>
                             </div>
@@ -101,13 +101,14 @@
                                         <span style='font-weight:bold;' class = 'card-subtitle'>Category: </span>". $row[$x]['category'] ."
                                     </div>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;'>Start: </span>". $row[$x]['dateStart']. "<br/>
-                                        <span style='font-weight:bold;'>End: </span>". $row[$x]['dateEnd']. "
+                                        <span style='font-weight:bold;'>Start: </span>". date('m/d/Y h:i a', strtotime($row[$x]['dateStart'])). "<br/>
+                                        <span style='font-weight:bold;'>End: </span>". date('m/d/Y h:i a', strtotime($row[$x]['dateEnd'])). "
                                     </div>
                                 </div>
                                 
                                 <hr/>
                                 <p class='card-text'>". $row[$x]['text']. "</p>
+                                <input type='button' class='btn btn-warning' value='Official Post' onclick='window.location=\"".$row[$x]['postlink'] ."\"'>
                             </div>
                         </div>
                         <br/>";
@@ -127,7 +128,7 @@
                 $count = $prep_stmt->rowCount();
                 for($x = 0; $x < $count; $x++) {
                     echo "<div class ='card border-light text-black'>
-                            <div class='card-header bg-secondary text-white'>
+                            <div class='card-header bg-success text-white'>
                                 <div class='row'>
                                     <div class='col'>
                                         <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
