@@ -32,13 +32,6 @@
                 margin-bottom: 10px; 
                 width:90%;
             }
-            .bg-img{
-                height: 100%;
-                filter: blur(8px);
-                -webkit-filter: blur(8px);
-                background-position: center;
-                background-image: url("https://cdn.vox-cdn.com/thumbor/6tVFspEcl0EuaGs3FGRfYbLgil4=/0x0:1920x1080/1520x1013/filters:focal(807x387:1113x693):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/64137076/mudkip_community_day.0.jpg");
-            }
         </style>
     </head>
     <body>
@@ -135,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
                                 <div class = 'row'>
                                     <div class = 'col'>
