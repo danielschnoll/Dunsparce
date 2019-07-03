@@ -70,27 +70,28 @@
                     $count = 4;
                 }
                 for($x = 0; $x < $count; $x++) {
-                    echo "<div class ='card border-light'>
+                    echo "<div class ='card border-light text-black'>
                             <div class='card-header bg-primary text-white'>
                                 <div class='row'>
                                     <div class='col'>
-                                        <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                        <h3 class='card-title text-center text-white'>". $row[$x]['title']. "</h4>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class = 'card-body'>
+                            <div class = 'card-body' style='background-size:cover; background-position:center; background-image: linear-gradient(270deg, rgba(242,242,242,0.90) -1%, rgba(242,242,242,0.90) 100%), url(\"".$row[$x]['img']."\")'>
                                 <div class = 'row'>
                                     <div class = 'col'>
                                         <span style='font-weight:bold;' class = 'card-subtitle text-muted'>Category: </span>". $row[$x]['category'] ."
                                     </div>
                                     <div class = 'col'>
-                                        <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". $row[$x]['posted']. "</h5>
+                                        <span style='font-weight:bold;' class = 'text-muted'>Posted: </span>". date('m/d/Y', strtotime($row[$x]['posted'])) . "</h5>
                                     </div>
                                 </div>
                                 
                                 <hr/>
                                 <p class='card-text'>". $row[$x]['text']. "</p>
+                                <input type='button' class='btn btn-warning' value='Official Post' onclick='window.location=\"".$row[$x]['postlink'] ."\"'>
                             </div>
                         </div>
                         <br/>";
@@ -108,11 +109,11 @@
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
                     for($x = 0; $x < $count; $x++) {
-                        echo "<div class ='card border-light'>
-                                <div class='card-header bg-danger text-white'>
+                        echo "<div class ='card border-light text-black'>
+                                <div class='card-header bg-success'>
                                     <div class='row'>
                                         <div class='col'>
-                                            <h3 class='card-title text-center'>". $row[$x]['title']. "</h4>
+                                            <h3 class='card-title text-center text-white'>". $row[$x]['title']. "</h4>
                                         </div>
                                     </div>
                                 </div>
