@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $cleardb_server   = $cleardb_url["host"];
+    // $cleardb_username = $cleardb_url["user"];
+    // $cleardb_password = $cleardb_url["pass"];
+    // $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -317,7 +317,7 @@
                         <!--Overview Header-->
                         <div class='card-header bg-danger text-center text-white'>
                             <div class='row'>
-                                <div class='col-'>
+                                <div class='col'>
                                     <h5>Boss List</h5>
                                 </div>
                             </div>
@@ -330,15 +330,16 @@
                     for($i = 0; $i < $count; $i+=2){
                         echo "<div class ='row'>";
                         for($j = $i; $j < $i+2; $j++){
+                            if($j >= $count){
+                                break;
+                            }
                             $fast = $row[$j]['fastMoveList'];
                             $fastArr = preg_split ("/\,/", $fast);
                             $charged = $row[$j]['chargedMoveList'];
                             $chargedArr = preg_split ("/\,/", $charged);
-                            if($j >= $count){
-                                break;
-                            }
+                            
 
-                    echo"       <div class = 'col'>
+                    echo"       <div class = 'col-md-6'>
                                     <img style='width:122px;height:122px;' src='". $row[$j]['img']."'/>
                                     <h2 class='card-title'>". $row[$j]['name']. "</h2>
                                     <span class='type ". $row[$j]['main']."'>". $row[$j]['main']. "</span> ";
@@ -360,26 +361,19 @@
                                     <hr/>
                                     
                                     
-                                    <div class = 'row '> <!-- Start of Moves List -->
+                                    <div class = 'row mobile-view'> <!-- Start of Moves List -->
                                         <!-- Fast -->
-                                        <div class = 'col text-left'>
-                                            <h6>Fast Moves:</h6>
-                                        </div>
-                                    </div>
-                                    <div class = 'row'>
-                                        <div class ='col text-center'>";
+                                        <div class = 'col text-right'>
+                                            <h6>Fast Moves:</h6><br/>";
                                         for($k = 0; $k < sizeof($fastArr); $k+=2){
                                             echo $fastArr[$k]." <span class='type ". $fastArr[$k+1]. "'>". $fastArr[$k+1]."</span>
                                             <br/>";
                                         }
-                              echo "        <br/>
-                                            <div class = 'row '>
-                                                <!-- Charged -->
-                                                <div class = 'col text-left'>
-                                                    <h6>Charged Moves:</h6>
-                                                </div>
-                                            </div>";
+                            echo "      </div>
 
+                                        <!-- Charged -->
+                                        <div class = 'col text-left'>
+                                            <h6>Charged Moves:</h6><br/>";
                                         for($k = 0; $k < sizeof($chargedArr); $k+=2){
                                             echo $chargedArr[$k]." <span class='type ". $chargedArr[$k+1]. "'>". $chargedArr[$k+1]."</span>
                                             <br/>";
@@ -388,11 +382,8 @@
                                     </div> <!-- End of Moves List -->
                                 </div>";
                         }
-                        echo "</div>";
-                        if($i < $count-2){
-                        echo "  <hr/>
-                                <hr/>";
-                        }
+                        echo "</div><hr/>";
+                        
 
                     }
                     include("raids.cardFooter.php");
