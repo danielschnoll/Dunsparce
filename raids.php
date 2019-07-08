@@ -328,12 +328,12 @@
                     $count = $prep_stmt->rowCount();
                 echo "  <div class='card-body'>";
                     for($i = 0; $i < $count; $i+=2){
-                        $fast = $row[$i]['fastMoveList'];
-                        $fastArr = preg_split ("/\,/", $fast);
-                        $charged = $row[$i]['chargedMoveList'];
-                        $chargedArr = preg_split ("/\,/", $charged);
                         echo "<div class ='row'>";
                         for($j = $i; $j < $i+2; $j++){
+                            $fast = $row[$j]['fastMoveList'];
+                            $fastArr = preg_split ("/\,/", $fast);
+                            $charged = $row[$j]['chargedMoveList'];
+                            $chargedArr = preg_split ("/\,/", $charged);
                             if($j >= $count){
                                 break;
                             }
