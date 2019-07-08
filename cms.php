@@ -375,7 +375,7 @@
                         <select name="name">
                             <option disabled selected value> -- select an option -- </option>
                             <?php
-                                $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1");
+                                $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 1 ORDER BY dex_num");
                                 $prep_stmt->execute();
                                 $row = $prep_stmt->fetchAll();
                                 $count = $prep_stmt->rowCount();
@@ -395,7 +395,7 @@
                         <select name="name">
                             <option disabled selected value> -- select an option -- </option>
                             <?php
-                                $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 0");
+                                $prep_stmt = $conn->prepare("SELECT * FROM raids WHERE isActive = 0 ORDER BY dex_num");
                                 $prep_stmt->execute();
                                 $row = $prep_stmt->fetchAll();
                                 $count = $prep_stmt->rowCount();
