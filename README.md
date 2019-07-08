@@ -30,7 +30,7 @@ Dunsparce is a LAMP stack web application, with a PHP backend and a MySql databa
 - v0.1
   - Initial page navigation layout, eggs page designed
 
-## :fast_forward: Future Features (v1.1+)
+## :fast_forward: Future Features (v1.2+)
 - "Easy View" vs "Detailed View" for the Raids page
 - Research page fully fleshed out
 - Admin user-auth/login for access to this CMS
