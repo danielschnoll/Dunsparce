@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <?php 
     //Get Heroku ClearDB connection information
-    $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $cleardb_server   = $cleardb_url["host"];
-    $cleardb_username = $cleardb_url["user"];
-    $cleardb_password = $cleardb_url["pass"];
-    $cleardb_db       = substr($cleardb_url["path"],1);
+    // $cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $cleardb_server   = $cleardb_url["host"];
+    // $cleardb_username = $cleardb_url["user"];
+    // $cleardb_password = $cleardb_url["pass"];
+    // $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -327,9 +327,9 @@
                     $row = $prep_stmt->fetchAll();
                     $count = $prep_stmt->rowCount();
                 echo "  <div class='card-body'>";
-                    for($i = 0; $i < $count; $i+=2){
+                    for($i = 0; $i < $count; $i+=3){
                         echo "<div class ='row'>";
-                        for($j = $i; $j < $i+2; $j++){
+                        for($j = $i; $j < $i+3; $j++){
                             if($j >= $count){
                                 break;
                             }
@@ -339,7 +339,7 @@
                             $chargedArr = preg_split ("/\,/", $charged);
                             
 
-                    echo"       <div class = 'col-md-6'>
+                    echo"       <div class = 'col-md-4'>
                                     <img style='width:122px;height:122px;' src='". $row[$j]['img']."'/>
                                     <h2 class='card-title'>". $row[$j]['name']. "</h2>
                                     <span class='type ". $row[$j]['main']."'>". $row[$j]['main']. "</span> ";
@@ -379,10 +379,10 @@
                                             <br/>";
                                         }
                                 echo "  </div>
-                                    </div> <!-- End of Moves List -->
+                                    </div><hr/><!-- End of Moves List -->
                                 </div>";
                         }
-                        echo "</div><hr/>";
+                        echo "</div>";
                         
 
                     }

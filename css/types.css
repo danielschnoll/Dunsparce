@@ -20,15 +20,15 @@ span.Grass{
 }
 
 span.Fire{
-    background: rgb(233, 62, 20);
+    background: rgb(255, 102, 31);
 }
 
 span.Normal{
-    background: #666666;
+    background: #a1a1a1;
 }
 
 span.Electric{
-    background: #ffec1c;
+    background: #ffd900;
 }
 
 span.Rock{
@@ -36,7 +36,7 @@ span.Rock{
 }
 
 span.Steel{
-    background: #a5a5a5;
+    background: #2b7a76;
 }
 
 span.Ground{
@@ -48,11 +48,11 @@ span.Ice{
 }
 
 span.Dragon{
-    background: #142793;
+    background: #2e42af;
 }
 
 span.Poison{
-    background: #8217a5;
+    background: #a828d3;
 }
 
 span.Bug{
@@ -64,19 +64,19 @@ span.Flying{
 }
 
 span.Fighting{
-    background: #992121;
+    background: #b42020;
 }
 
 span.Ghost{
-    background: #705898;
+    background: #705897;
 }
 
 span.Psychic{
-    background: #F85888;
+    background: rgb(255, 77, 130);
 }
 
 span.Dark{
-    background: #666666;
+    background: #505050;
 }
 
 span.Fairy{
