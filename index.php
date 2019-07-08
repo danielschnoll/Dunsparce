@@ -72,7 +72,7 @@
                 <div class = 'col' id = 'curr'>
                 <h1>Current Events</h1>
                 <hr/>";
-                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'GMT','US/Eastern') < dateEnd AND CONVERT_TZ(NOW(),'GMT','US/Eastern') > dateStart ORDER BY dateEnd DESC");
+                $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE CONVERT_TZ(NOW(),'GMT','US/Eastern') < dateEnd AND CONVERT_TZ(NOW(),'GMT','US/Eastern') > dateStart ORDER BY dateEnd ASC");
                 // $prep_stmt = $conn->prepare("SELECT * FROM updates WHERE NOW() < dateEnd AND NOW() > dateStart ORDER BY dateEnd ASC");
 
                 $prep_stmt->execute();
