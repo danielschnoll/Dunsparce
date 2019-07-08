@@ -16,7 +16,7 @@ Dunsparce is a LAMP stack web application, with a PHP backend and a MySql databa
 - Separation of News and Events pages
 - Cleaner UI for News and Events page
 
-### :hourglass: Past Releases
+### :rewind: Past Releases
 - Beta v1.0
   - Beta Release!! Features include Game News and Events, Raids, and Egg pools
   - Detailed information such as min/max CP, base stats, and shininess
@@ -30,7 +30,7 @@ Dunsparce is a LAMP stack web application, with a PHP backend and a MySql databa
 - v0.1
   - Initial page navigation layout, eggs page designed
 
-## Future Features (v1.1+)
+## :fast_forward: Future Features (v1.1+)
 - "Easy View" vs "Detailed View" for the Raids page
 - Research page fully fleshed out
 - Admin user-auth/login for access to this CMS
