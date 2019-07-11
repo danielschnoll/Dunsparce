@@ -211,95 +211,95 @@
                     <h5 style="text-decoration: underline;">Insert New Raid Boss</h5>
                     <form class = "form-group" method="post">
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Name</label>
                                 <input name="name" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Img</label>
                                 <input name="img" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Dex #</label>
                                 <input name="dex_num" type="number" min="1" max= "999"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Primary</label>
                                 <input name="main" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Secondary</label>
                                 <input name="secondary" default="" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Max CP</label>
                                 <input name="absMaxCP" type="number" min="0"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Attack</label>
                                 <input name="atk" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Defense</label>
                                 <input name="def" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Stamina</label>
                                 <input name="sta" type="number" min="0"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Raid CP</label>
                                 <input name="raid_cp" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Max Catch</label>
                                 <input name="max_cp" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>WB Max Catch</label>
                                 <input name="max_wb" type="number" min="0"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Min Catch</label>
                                 <input name="min_cp" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>WB Min Catch</label>
                                 <input name="min_wb" type="number" min="0"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Raid Tier</label>
                                 <input name="tier" type="number" min="1" max = "5"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Active?</label>
                                 <input name="isActive" type="checkbox" value = "1"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Weaknesses</label>
                                 <input name="weaknesses" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Resistances</label>
                                 <input name="resistances" type="text"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-6'>
                                 <label>Fast Move List</label>
                                 <input name="fastMoveList" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-6'>
                                 <label>Charged Move List</label>
                                 <input name="chargedMoveList" type="text"/>
                             </div>
@@ -315,51 +315,51 @@
                     <h5 style="text-decoration: underline;">Insert New Counter Boss</h5>
                     <form class = "form-group" method="post">
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Name</label>
                                 <input name="name" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Img</label>
                                 <input name="img" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Dex #</label>
                                 <input name="dex_num" type="number" min="1" max= "999"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Counter Boss Dex #</label>
                                 <input name="counterBossDex" type="number" min="1" max= "999"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Priority</label>
                                 <input name="priority" type="number" min="1" max = "10"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Fast Move</label>
                                 <input name="fast" type="text"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Fast Move Type</label>
                                 <input name="fast_type" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Charged Move</label>
                                 <input name="charged" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Charged Move Type</label>
                                 <input name="charged_type" type="text"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-12'>
                                 <label>Description</label>
-                                <input name="description" type="text" value=""/>
+                                <textarea style='width:100%;height:100px;' name="description" type="text"></textarea>
                             </div>
                         </div>
                         <br/>
@@ -440,43 +440,43 @@
                     <h5 style="text-decoration: underline;">Add New Pokemon to Egg Pool</h5>
                     <form class="form-group" method="post">
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Name</label>
                                 <input name="name" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Img</label>
                                 <input name="img" type="text"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Dex #</label>
                                 <input name="dex_num" type="number" min="1" max= "999"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Min CP</label>
                                 <input name="min_cp" type="number" min="1"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Max CP</label>
                                 <input name="max_cp" type="number" min="1"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Egg Distance</label>
                                 <input name="egg_dist" type="number" min="1" max= "10"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Baby?</label>
                                 <input name="baby" type="checkbox" value = "1"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Is Active?</label>
                                 <input name="isActive" type="checkbox" value = "1"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Shiny?</label>
                                 <input name="shiny" type="checkbox" value = "1"/>
                             </div>
@@ -574,7 +574,7 @@
                     <h5 style="text-decoration: underline;">Add New Post</h5>
                     <form class = "form-group" method="post">
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-6'>
                                 <label>Category</label>
                                 <select name="category">
                                     <option name = "Raids" value = "Raids">Raid Event</option>
@@ -586,40 +586,40 @@
                                     <option name = "Site News" value = "Site News">Site News</option>
                                 </select>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-6'>
                                 <label>Title</label>
                                 <input name="title" type="text"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-12'>
                                 <label>Description</label><br/>
-                                <input style='width:400px;' name="text" type="text"/>
+                                <textarea style='width:100%;height:100px;' name="text" type="text"></textarea>
                             </div>
                         </div>
                         <br/>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Posted On</label>
                                 <input name="date" type="date"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Event Start</label>
                                 <input name="dateStart" type="datetime-local"/>
                             </div>
-                            <div class = 'col'>
+                            <div class = 'col-md-4'>
                                 <label>Event End</label>
                                 <input name="dateEnd" type="datetime-local"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-12'>
                                 <label>Post Link</label><br/>
                                 <input style='width:400px;' name="postlink" type="text"/>
                             </div>
                         </div>
                         <div class = 'row'>
-                            <div class = 'col'>
+                            <div class = 'col-md-12'>
                                 <label>Img URL</label><br/>
                                 <input style='width:400px;' name="img" type="text"/>
                             </div>
