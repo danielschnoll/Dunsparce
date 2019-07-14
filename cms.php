@@ -57,15 +57,15 @@
 
     if(isset($_POST['SubmitNewCounter'])){
         // prepare sql and bind parameters
-        $stmt = $conn->prepare("INSERT INTO counters (name, img, dex_num, counterBossDex, priority, 
+        $stmt = $conn->prepare("INSERT INTO counters (name, img, dex_num, counterBossName, priority, 
                                 fast, fast_type, charged, charged_type, description) 
-                                VALUES (:name, :img, :dex_num, :counterBossDex, :priority, 
+                                VALUES (:name, :img, :dex_num, :counterBossName, :priority, 
                                 :fast, :fast_type, :charged, :charged_type, :description)");
 
         $stmt->bindParam(':name', $_POST['name']);
         $stmt->bindParam(':img', $_POST['img']);
         $stmt->bindParam(':dex_num', $_POST['dex_num']);
-        $stmt->bindParam(':counterBossDex', $_POST['counterBossDex']);
+        $stmt->bindParam(':counterBossName', $_POST['counterBossName']);
         $stmt->bindParam(':priority', $_POST['priority']);
         $stmt->bindParam(':fast', $_POST['fast']);
         $stmt->bindParam(':fast_type', $_POST['fast_type']);
@@ -330,8 +330,8 @@
                         </div>
                         <div class = 'row'>
                             <div class = 'col-md-4'>
-                                <label>Counter Boss Dex #</label>
-                                <input name="counterBossDex" type="number" min="1" max= "999"/>
+                                <label>Counter Boss Name</label>
+                                <input name="counterBossName" type="text"/>
                             </div>
                             <div class = 'col-md-4'>
                                 <label>Priority</label>
