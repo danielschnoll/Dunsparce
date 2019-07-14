@@ -272,8 +272,9 @@
 
                                     <div class='card-body'>";
 
-                        $currBossDex = $row[$x]['dex_num'];
-                        $stmt = "SELECT * FROM counters WHERE counterBossDex =" . $currBossDex ." ORDER BY priority;";
+                        $currBossName = $row[$x]['name'];
+                        var_dump($currBossName);
+                        $stmt = "SELECT * FROM counters WHERE counterBossName =" . $currBossName ." ORDER BY priority;";
                         $inner_prepStmt = $conn->prepare($stmt);
                         $inner_prepStmt->execute();
                         $innerRow = $inner_prepStmt->fetchAll();
