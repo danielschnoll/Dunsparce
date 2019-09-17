@@ -8,8 +8,8 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -101,8 +101,8 @@
                         if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-2-md text-center text-black'>
-                                <div class='container bg-light'>
+                        echo "<div class = 'col-2-md-sm text-center text-black'>
+                                <div class='container'>
                                     <img src='".$row[$y]['img']."'/>
                                     <br/><h6>";
                                     if ($row[$y]['shiny']){
@@ -136,7 +136,7 @@
                             break;
                         }
                         echo "<div class = 'col-2-md text-center text-black'>
-                                <div class='container bg-light'>
+                                <div class='container'>
                                     <img src='".$row[$y]['img']."'/>
                                     <br/><h6>";
                                     if ($row[$y]['shiny']){
@@ -170,7 +170,7 @@
                             break;
                         }
                         echo "<div class = 'col-2-md text-center text-black'>
-                                <div class='container bg-light'>
+                                <div class='container'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>";
                                     if ($row[$y]['shiny']){
@@ -204,7 +204,7 @@
                             break;
                         }
                         echo "<div class = 'col-2-md text-center text-black'>
-                                <div class='container bg-light'>
+                                <div class='container'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>";
                                     if ($row[$y]['shiny']){

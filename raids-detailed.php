@@ -27,17 +27,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        
-        <style>
-            div.jumbotron {
-                background-image: url("/img/jumbotron/raids.jpg");
-                background-size: 100% 100%;
-                height: 400px; 
-            }
-            h1{
-                margin: 0 auto;
-            }   
-        </style>
     </head>
     <body>
         <header>
@@ -70,7 +59,11 @@
                 </div>
             </nav>
             <div class="jumbotron">
-                <h1 class = "text-center">Active Raid Bosses</h1>
+                <div class = "container text-center">
+                    <h1>Active Raid Bosses</h1>
+                    <p>These are the Current Raid Bosses for the "A Unova Unveiling" Ultra Bonus Week 3 Event.</p>
+                    <p>They are expected to change on September 23 when the event ends</p>
+                </div>
             </div>    
         </header>
         <script>
