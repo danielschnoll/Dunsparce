@@ -90,12 +90,12 @@
             <p> These are the Current Raid Bosses for the "A Unova Unveiling" Ultra Bonus Week 3 Event.
                 They are expected to change on September 23 when the event ends. The list will be updated
                 as new information is revealed or as new bosses are added, as sometimes Niantic adds bosses
-                to the rotation mid-event.
+                to the rotation mid-event. If you're looking for just the list of bosses, click <a href="raids-list.php">here</a>.
             </p>
-            <p> Always keep in mind the weather which you're raiding in. Weather plays an important 
-                factor in which counters you wind up using. This detailed list is by no means 
-                definitive, and merely serves as a rough guide for how to craft your counter rosters 
-                when going up against difficult bosses.
+            <p> <strong>NOTE</strong>: Always keep in mind the weather which you're raiding in. Weather plays 
+                an important factor in choosing the counters to use in a given scenario. This detailed list 
+                is by no means definitive, or final. Other sources may advise you differently. It merely serves 
+                as a general guide for how to craft your counter rosters when going up against difficult bosses.
             </p>
             <div class = 'row text-center'>
                 <div class = 'col'>
