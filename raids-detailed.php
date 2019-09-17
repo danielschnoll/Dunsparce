@@ -8,8 +8,8 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
-        $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        // $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
@@ -58,12 +58,8 @@
                     </ul>
                 </div>
             </nav>
-            <div class="jumbotron">
-                <div class = "container text-center">
-                    <h1>Active Raid Bosses</h1>
-                    <p>These are the Current Raid Bosses for the "A Unova Unveiling" Ultra Bonus Week 3 Event.</p>
-                    <p>They are expected to change on September 23 when the event ends</p>
-                </div>
+            <div class="jumbotron text-center">
+                <h1>Active Raid Bosses</h1>
             </div>    
         </header>
         <script>
@@ -91,9 +87,19 @@
             });
         </script>
         <div class="container">
-            <div class = 'row'>
+            <p> These are the Current Raid Bosses for the "A Unova Unveiling" Ultra Bonus Week 3 Event.
+                They are expected to change on September 23 when the event ends. The list will be updated
+                as new information is revealed or as new bosses are added, as sometimes Niantic adds bosses
+                to the rotation mid-event.
+            </p>
+            <p> Always keep in mind the weather which you're raiding in. Weather plays an important 
+                factor in which counters you wind up using. This detailed list is by no means 
+                definitive, and merely serves as a rough guide for how to craft your counter rosters 
+                when going up against difficult bosses.
+            </p>
+            <div class = 'row text-center'>
                 <div class = 'col'>
-                    <h4>Show/Hide Sections</h4>
+                    <h5>Use the Show/Hide toggles to make page navigation easier. All tiers are shown by default</h5>
                 </div>
             </div>
             <div class = 'row text-center'>
