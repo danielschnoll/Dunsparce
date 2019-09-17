@@ -8,7 +8,7 @@
     $cleardb_db       = substr($cleardb_url["path"],1);
 
     try {
-        // $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
+        $conn = new PDO("mysql:host=localhost; dbname=dunsparce.net", "root", "");
         $conn = new PDO("mysql:host=".$cleardb_server."; dbname=".$cleardb_db, $cleardb_username, $cleardb_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
@@ -53,8 +53,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="news.php">News</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="raids.php">Raids</a>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Raids</a>
+                            <div class = "dropdown-menu">
+                                <a class = "dropdown-item" href="raids-list.php">List View</a>
+                                <a class = "dropdown-item" href="raids-detailed.php">Detailed Counters View</a>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="research.php">Research</a>
