@@ -40,14 +40,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="news.php">News</a>
                         </li>
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Raids</a>
                             <div class = "dropdown-menu">
                                 <a class = "dropdown-item" href="raids-list.php">List View</a>
                                 <a class = "dropdown-item" href="raids-detailed.php">Detailed Counters View</a>
                             </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="research.php">Research</a>
                         </li>
                         <li class="nav-item">
