@@ -88,7 +88,7 @@
         </script>
         <div class="container">
             <p> These are the Current Raid Bosses for the "A Unova Unveiling" Ultra Bonus Week 3 Event.
-                They are expected to change on September 23 when the event ends. The list will be updated
+                They are expected to change on <i>September 23</i> when the event ends. The list will be updated
                 as new information is revealed or as new bosses are added, as sometimes Niantic adds bosses
                 to the rotation mid-event. If you're looking for just the list of bosses, click <a href="raids-list.php">here</a>.
             </p>
