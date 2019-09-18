@@ -86,7 +86,14 @@
             </div>    
         </header>
         <div class = "container">
-
+            <div class = "row">
+                <div class = "col">
+                    These are all the current egg hatches in Pokémon GO. The data is sourced from TheSilphRoad. 
+                    Please note, this list is always changing so it might not be 100% accurate.
+                    <br/>
+                    <br/>
+                </div>
+            </div>
             <!--2K Eggs-->
             <p><img src="/img/egg_2k.png" style="width:26px;height:32px;"/> 2km</p>
             <hr/>
