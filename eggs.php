@@ -125,7 +125,7 @@
             <p><img src="/img/egg_5k.png" style="width:26px;height:32px;"/> 5km</p>
             <hr/>
             <?php
-                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 5 ORDER BY dex_num");
+                $prep_stmt = $conn->prepare("SELECT * FROM eggs WHERE egg_dist = 5 AND isActive = 1 ORDER BY dex_num");
                 $prep_stmt->execute();
                 $row = $prep_stmt->fetchAll();
                 $count = $prep_stmt->rowCount();
