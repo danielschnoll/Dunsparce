@@ -89,7 +89,7 @@
         <div class="container">
             <div class = "row">
                 <div class = "col">
-                    <p> These are the Current Raid Bosses for Giratina-Altered's return to raid battles.
+                    <p> These are the Current Raid Bosses for Altered Form Giratina's return to raid battles.
                         They are expected to change on <i>October 17th</i> when Giratina leaves the rotation. 
                         If you're looking for just the list of bosses, click <a href="raids-list.php">here</a>.
                     </p>
