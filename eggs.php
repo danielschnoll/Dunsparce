@@ -108,7 +108,7 @@
                         if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-2-md-sm text-center text-black'>
+                        echo "<div class = 'col-2-md flex-grow-1 text-center text-black'>
                                 <div class='container'>
                                     <img src='".$row[$y]['img']."'/>
                                     <br/><h6>";
@@ -142,7 +142,7 @@
                         if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-2-md text-center text-black'>
+                        echo "<div class = 'col-2-md flex-grow-1 text-center text-black'>
                                 <div class='container'>
                                     <img src='".$row[$y]['img']."'/>
                                     <br/><h6>";
@@ -176,7 +176,7 @@
                         if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-2-md text-center text-black'>
+                        echo "<div class = 'col-2-md flex-grow-1 text-center text-black'>
                                 <div class='container'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>";
@@ -210,7 +210,7 @@
                         if($y >= $count){
                             break;
                         }
-                        echo "<div class = 'col-2-md text-center text-black'>
+                        echo "<div class = 'col-2-md flex-grow-1 text-center text-black'>
                                 <div class='container'>
                                     <img style='width:100px;height:100px;' src='".$row[$y]['img']."'/>
                                     <br/><h6>";
