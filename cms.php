@@ -55,6 +55,18 @@
 
     }
 
+    if(isset($_POST['SubmitUpdatedBoss'])){
+        $stmt = $conn->prepare("UPDATE raids  
+                                SET raid_cp = :raid_cp, tier = :tier
+                                WHERE name = :name");
+        $stmt->bindParam(':raid_cp', $_POST['raid_cp']);
+        $stmt->bindParam(':tier', $_POST['tier']);
+        $stmt->bindParam(':name', $_POST['name']);
+        
+        $stmt->execute();
+
+    }
+
     if(isset($_POST['SubmitNewCounter'])){
         // prepare sql and bind parameters
         $stmt = $conn->prepare("INSERT INTO counters (name, img, dex_num, counterBossName, priority, 
@@ -368,6 +380,30 @@
                         </div>
                         <br/>
                         <input name="SubmitNewCounter" type ="submit" value="Submit"/>
+                    </form>
+                </div>
+            </div>
+            <br/>
+            <div class ='row'>
+                <div class = 'col'>
+                    <h5 style="text-decoration: underline;">Change Boss Stats/Info</h5>
+                    <form class = "form-group" method="post">
+                        <div class = 'row'>
+                            <div class = 'col-md-4'>
+                                <label>Name</label>
+                                <input name="name" type="text"/>
+                            </div>
+                            <div class = 'col-md-4'>
+                                <label>Raid CP</label>
+                                <input name="raid_cp" type="number" min="0"/>
+                            </div>
+                            <div class = 'col-md-4'>
+                                <label>Raid Tier</label>
+                                <input name="tier" type="number" min="1" max = "5"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <input type = "submit" name="SubmitUpdatedBoss" value="Submit"/>
                     </form>
                 </div>
             </div>
